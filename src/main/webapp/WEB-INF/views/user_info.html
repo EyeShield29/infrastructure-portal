@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>新增用户</title>
+<meta name="decorator" content="form" />
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li class="active">个人信息</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				个人信息&nbsp; &nbsp; &nbsp; <button class="btn btn-sm btn-purple" data-toggle="modal"
+					data-target="#modify_portal_user-modal" href="javascript:void(0)"
+					onclick="modifyPortalUser('${portalUserVo.id}','${portalUserVo.account}','${portalUserVo.role}','${portalUserVo.roleId}','${portalUserVo.user_name}',${portalUserVo.sex},'${portalUserVo.phoneNum}','${portalUserVo.email}')">
+					<i class="icon-edit bigger-120"></i>修改个人信息
+			</button>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 个人账号 :</label>
+						
+						<div class="col-sm-9">
+							<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${portalUserVo.account}</label>
+						</div>
+					</div>
+					
+					<div class="space-2"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 真实姓名 :</label>
+	
+						<div class="col-sm-9">
+						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${portalUserVo.user_name} </label>
+						</div>
+					</div>
+					
+					<div class="space-2"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 性别 :</label>
+	
+						<div class="col-sm-9">
+							<label class="col-sm-3 control-label no-padding-right" style="text-align:left">
+								<#if portalUserVo.sex=1>男
+								<#elseif portalUserVo.sex=0>女
+								</#if>
+							</label>
+						</div>
+					</div>
+					
+					<div class="space-2"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 角色 :</label>
+	
+						<div class="col-sm-9">
+						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${portalUserVo.role} </label>
+						</div>
+					</div>
+					
+					<div class="space-2"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 手机号码 :</label>
+	
+						<div class="col-sm-9">
+						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${portalUserVo.phoneNum} </label>
+						</div>
+					</div>
+					
+					<div class="space-2"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"> 电子邮箱 :</label>
+	
+						<div class="col-sm-9">
+						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${portalUserVo.email} </label>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /.page-content -->
+	
+	<div id="modify_portal_user-modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="blue bigger">修改用户基本信息</h4>
+					</div>
+					<div class="modal-body overflow-visible">
+						<form class="form-inline"
+							action="${ctx}/portal_user/modifyUserInfo"
+							id="modify_portal_user-form" method="post">
+							<div class="row">
+								<div class="col-xs-12">
+									<!-- PAGE CONTENT BEGINS -->
+									<div class="from-group">
+										<div class="input-group">
+											<input type="hidden" id="id" name="id" class="col-xs-10 col-sm-5"
+													value=""/>
+											
+											<label class="col-sm-3 control-label no-padding-right">账号:</label>
+											<div class="col-sm-7">
+												<input type="text" id="account" name="account" class="col-xs-10 col-sm-5"
+													value="" readonly />
+											</div>
+											
+											<label class="col-sm-3 control-label no-padding-right">姓名:</label>
+											<div class="col-sm-7">
+												<input type="text" id="userName" name="userName" class="col-xs-10 col-sm-5"
+													value="" required />
+											</div>
+											
+											<label class="col-sm-3 control-label no-padding-right">
+												性别:</label>
+											<div class="col-sm-7">
+												<select name="sex" class="col-sm-5" id="sex">
+													<option value="1">男</option>
+													<option value="0">女</option>
+												</select>
+											</div>
+											
+											<label class="col-sm-3 control-label no-padding-right">
+												角色:</label>
+											<div class="col-sm-7">
+												<input type="text" id="roleName" name="roleName" readonly
+													class="col-xs-10 col-sm-5" value=""/>
+											</div>
+											
+											<label class="col-sm-3 control-label no-padding-right">手机号码:</label>
+											<div class="col-sm-7">
+												<input type="text" id="phoneNum" name="phoneNum"
+													class="col-xs-10 col-sm-5" value=""/>
+											</div>
+											
+											<label class="col-sm-3 control-label no-padding-right">邮箱:</label>
+											<div class="col-sm-7">
+												<input type="text" id="email" name="email"
+													class="col-xs-10 col-sm-5" value=""/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-sm btn-info"
+							onclick="$('#modify_portal_user-form').submit();">
+							<i class="icon-ok"></i> 提交
+						</button>
+						<button class="btn btn-sm" data-dismiss="modal">
+							<i class="icon-remove"></i> 取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+	<script type="text/javascript">
+		$(function() {
+			$("#modify_portal_user-form").validate();
+			$("#modify_portal_user-form").bind(
+					'submit',
+					function() {
+						//校验表单
+						if (!$(this).valid()) {
+							return false;
+						}
+						ajaxSubmit(this, function(response) {
+							response = $.parseJSON(response);
+							if (response.status == 1) {
+								alert("修改成功！");
+								window.location.reload();
+							} else {
+								alert(response.errormsg);
+							}
+						});
+						return false;
+					});
+		});
+		function modifyPortalUser(id,account,role,roleId,user_name,sex,phoneNum,email) {
+			//alert(id + "," + account + "," + role + "," + user_name + "," + sex + "," + phoneNum + "," + email);
+			 $("#id").val(id);
+			 $("#account").val(account);
+			 $("#userName").val(user_name);
+			 $("#phoneNum").val(phoneNum);
+			 $("#email").val(email);
+			 if(1==sex){
+				 $("#sex").val("1");
+			 }else if(0==sex){
+				 $("#sex").val("0");
+			 }
+			 $("#roleName").val(role);
+		}
+	</script>
+</body>
+</html>

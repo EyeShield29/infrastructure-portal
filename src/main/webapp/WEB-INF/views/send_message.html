@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>新增用户</title>
+<meta name="decorator" content="form" />
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li><a href="#">站内信</a></li>
+			<li class="active">发送信息</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				站内信 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+					发送信件
+				</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<form class="form-horizontal" action="${ctx}/message/sendMessage"
+						id="send_message-form" method="post">
+					<!-- #section:elements.form -->
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right">
+							接收人账号 </label>
+
+						<div class="col-sm-9">
+							<!-- #section:plugins/input.select2 -->
+							<select id="receiverAccount" name="receiverAccount" class="select2 col-xs-10 col-sm-5"
+								data-placeholder="Click to Choose...">
+								<option value="">&nbsp;</option>
+								<option value="admin">admin</option>
+								<option value="manger">manger</option>
+							</select>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="account"> 信件标题 </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="messageTitle" name="messageTitle" placeholder="请输入标题…"
+								class="col-xs-10 col-sm-5" required/>
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="userName"> 信件内容 </label>
+
+						<div class="col-sm-9">
+							<textarea class="form-control" id="content" name="content" placeholder="信件内容"></textarea>
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info">
+								<i class="ace-icon fa fa-check bigger-110"></i> 发送
+							</button>
+
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+							</button> 
+						</div>
+					</div>
+					</form>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+
+	<script type="text/javascript">
+		$(function() {
+				$("#send_message-form").validate();
+				$("#send_message-form").bind(
+						'submit',
+						function() {
+							//校验表单
+							if (!$(this).valid()) {
+								return false;
+							}
+							ajaxSubmit(this, function(response) {
+								response = $.parseJSON(response);
+								if (response.status == 1) {
+									alert("发送成功！");
+									//window.location.href="${ctx}/message/show_message_list?type=1";
+									window.location.reload();
+								} else {
+									alert(response.errormsg);
+								}
+							});
+							return false;
+						});
+		});
+	</script>
+</body>
+</html>

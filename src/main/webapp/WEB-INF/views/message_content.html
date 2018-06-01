@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>新增用户</title>
+<meta name="decorator" content="form" />
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li><a href="#">站内信</a></li>
+			<li class="active">信件详情</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				站内信 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+					信件详情
+				</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+		
+		<#if messageInfo.receiverAccount==ownAccount>
+		<div class="row">
+				<div class="col-xs-12" style="float:center">
+						<div class="row">
+							<div class="col-xs-12 col-sm-8">
+									<button class="btn btn-sm btn-purple" data-toggle="modal"
+										data-target="#reply_message-modal">
+										<i class="icon-edit bigger-120"></i>给他发信息
+									</button>
+							</div>
+						</div>
+				</div>
+		</div>
+		</#if>
+		
+		<div class="row">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="form-group">
+					<label class="control-label col-sm-3 no-padding-right">发信人： </label>
+		
+					<div class="col-sm-7">
+						<!-- #section:plugins/input.select2 -->
+						<input type="text" value="${messageInfo.senderAccount}"
+							class="col-xs-10 col-sm-5" readonly />
+					</div>
+				</div>
+				
+				<div class="space-4"></div>
+				
+				<div class="form-group">
+				
+					<label class="control-label col-sm-3 no-padding-right">收信人： </label>
+		
+					<div class="col-sm-7">
+						<!-- #section:plugins/input.select2 -->
+						<input type="text" value="${messageInfo.receiverAccount}"
+							class="col-xs-10 col-sm-5" readonly />
+					</div>
+				
+				</div>
+				
+				<div class="space-4"></div>
+
+				<div class="form-group">
+
+					<label class="col-sm-3 control-label no-padding-right">信件标题: </label>
+	
+					<div class="col-sm-7">
+						<input type="text" value="${messageInfo.messageTitle}"
+							class="col-xs-10 col-sm-5" readonly />
+					</div>
+				
+				</div>
+				
+				<div class="space-4"></div>
+
+				<div class="form-group">
+				
+					<label class="col-sm-3 control-label no-padding-right">发送时间: </label>
+	
+					<div class="col-sm-7">
+						<input type="text" value="${messageInfo.sendTime?string('yyyy-MM-dd HH:mm:ss')}"
+							class="col-xs-10 col-sm-5" readonly />
+					</div>
+				
+				</div>
+				
+				<div class="space-4"></div>
+
+				<div class="form-group">
+
+					<label class="col-sm-3 control-label no-padding-right">信件内容: </label>
+	
+					<div class="col-sm-7">
+						<textarea class="form-control" readonly>${messageInfo.content}</textarea>
+					</div>
+
+				</div>
+				
+				<div class="space-4"></div>
+
+		</div>
+		<!-- /.row -->
+		
+	</div>
+	
+	<div id="reply_message-modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="blue bigger">发送信息</h4>
+					</div>
+					<div class="modal-body overflow-visible">
+						<form class="form-horizontal"
+							action="${ctx}/message/sendMessage"
+							id="reply_message-form" method="post">
+							<div class="row">
+								<div class="col-xs-12">
+									<!-- PAGE CONTENT BEGINS -->
+									<div class="form-group">
+										<label
+											class="control-label col-xs-12 col-sm-3 no-padding-right">
+											接收人账号 </label>
+	
+										<div class="col-sm-9">
+											<!-- #section:plugins/input.select2 -->
+											<div class="col-sm-9">
+												<input type="text" id="receiverAccount"
+													name="receiverAccount"
+													value="${messageInfo.senderAccount}"
+													class="col-xs-10 col-sm-5" readonly />
+											</div>
+										</div>
+									</div>
+									<div class="space-4"></div>
+	
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="account"> 信件标题 </label>
+	
+										<div class="col-sm-9">
+											<input type="text" id="messageTitle" name="messageTitle"
+												placeholder="请输入标题…" class="col-xs-10 col-sm-5" required />
+										</div>
+									</div>
+	
+									<div class="space-4"></div>
+	
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="userName"> 信件内容 </label>
+	
+										<div class="col-sm-9">
+											<textarea class="form-control" id="content" name="content"
+												placeholder="信件内容"></textarea>
+										</div>
+									</div>
+	
+									<div class="space-4"></div>
+
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-sm btn-info"
+							onclick="$('#reply_message-form').submit();">
+							<i class="icon-ok"></i> 提交
+						</button>
+						<button class="btn btn-sm" data-dismiss="modal">
+							<i class="icon-remove"></i> 取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+								<!-- /.page-content -->
+
+	<script type="text/javascript">
+		$(function() {
+				$("#reply_message-form").validate();
+				$("#reply_message-form").bind(
+						'submit',
+						function() {
+							//校验表单
+							if (!$(this).valid()) {
+								return false;
+							}
+							ajaxSubmit(this, function(response) {
+								response = $.parseJSON(response);
+								if (response.status == 1) {
+									alert("发送成功！");
+									//window.location.href="${ctx}/message/show_message_list?type=1";
+									window.location.reload();
+								} else {
+									alert(response.errormsg);
+								}
+							});
+							return false;
+						});
+		});
+	</script>
+</body>
+</html>

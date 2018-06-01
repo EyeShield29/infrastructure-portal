@@ -1,0 +1,158 @@
+<#assign shiro=JspTaglibs["/WEB-INF/tlds/shiro.tld"]/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>首页 - 导购管理后台</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<#include "/common/common_css.html">
+</head>
+
+<body>
+	<div class="navbar navbar-default" id="navbar">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('navbar', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="navbar-container" id="navbar-container">
+			<!-- /.navbar-header -->
+
+			<div class="navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="light-blue"><a data-toggle="dropdown" href="#"
+						class="dropdown-toggle"> <!-- <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" /> -->
+							<span class="user-info"> <small>你好,</small>
+								${loginInfo.userName}
+						</span> <i class="icon-caret-down"></i>
+					</a>
+
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="${ctx}/logout"> 注销 </a></li>
+						</ul></li>
+				</ul>
+				<!-- /.ace-nav -->
+			</div>
+			<!-- /.navbar-header -->
+		</div>
+		<!-- /.container -->
+	</div>
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="#"> <span
+				class="menu-text"></span>
+			</a>
+
+			<div class="sidebar" id="sidebar">
+				<script type="text/javascript">
+					try {
+						ace.settings.check('sidebar', 'fixed')
+					} catch (e) {
+					}
+				</script>
+
+				<ul class="nav nav-list" id="navlist">
+					
+					
+					<@shiro.hasPermission name="portal:service_area:manage">
+					<li><a href="${ctx}/portal_service_area/show_service_area_list" target="iframe_content"> <span
+							class="menu-text"> 管理导购服务区域</span>
+					</a></li>
+					</@shiro.hasPermission>
+					
+					<@shiro.hasPermission name="portal:coupon:manage">
+					<li><a href="${ctx}/portal_coupon/show_coupon_list" target="iframe_content">
+							<span class="menu-text"> 管理优惠劵 </span>
+					</a></li>
+					</@shiro.hasPermission>
+						
+					<@shiro.hasPermission name="portal:app_version:manage">
+					<li><a href="${ctx}/app_version/list" target="iframe_content">
+							<span class="menu-text"> app版本管理 </span>
+					</a></li>
+					</@shiro.hasPermission>	
+							
+					<@shiro.hasPermission name="portal:user:manage">
+					<li><a href="${ctx}/portal_user/show_user_list" target="iframe_content">
+							<span class="menu-text"> 后台账号管理</span>
+					</a></li>
+					</@shiro.hasPermission>
+		
+					<@shiro.hasPermission name="portal:guide:manage">
+					<li><a href="${ctx}/portal_guide/show_guide_list" target="iframe_content">
+							<span class="menu-text"> 导购管理</span>
+					</a></li>
+					</@shiro.hasPermission>
+
+					<@shiro.hasPermission name="portal:order:manage">
+					<li><a href="${ctx}/portal_order/show_order_list" target="iframe_content">
+							<span class="menu-text"> 订单管理</span>
+					</a></li>
+					</@shiro.hasPermission>
+
+
+					<@shiro.hasPermission name="portal:customer:manage">
+					<li><a href="${ctx}/portal_customer/show_customer_list" target="iframe_content">
+							<span class="menu-text"> 用户管理</span>
+					</a></li>
+					</@shiro.hasPermission>
+
+
+				</ul>
+				<!-- /.nav-list -->
+
+				<div class="sidebar-collapse" id="sidebar-collapse">
+					<i class="icon-double-angle-left"
+						data-icon1="icon-double-angle-left"
+						data-icon2="icon-double-angle-right"></i>
+				</div>
+
+				<script type="text/javascript">
+					try {
+						ace.settings.check('sidebar', 'collapsed')
+					} catch (e) {
+					}
+				</script>
+			</div>
+
+			<div class="main-content">
+				<iframe width="100%" height="100%" frameborder="0" scrolling="auto"
+					style="margin: 0px; padding: 0px;" src="${ctx}/home"
+					id="iframe_content" name="iframe_content"></iframe>
+			</div>
+			<!-- /.main-content -->
+
+		</div>
+		<!-- /.main-container-inner -->
+
+	</div>
+	<!-- /.main-container -->
+
+	<#include "/common/common_js.html">
+
+	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+		$(function() {
+			var height = $(document).height() - 60;
+			//$(".main-content").height(height + 'px');
+			$("#iframe_content").height(height + 'px');
+			$("#navlist li a").click(function() {
+				$("#navlist li").removeClass("active");
+				$(this).parent().addClass("active");
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.document.DocumentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.document.DocumentInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uploader_id" jdbcType="INTEGER" property="uploaderId" />
+    <result column="document_name" jdbcType="VARCHAR" property="documentName" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="document_size" jdbcType="INTEGER" property="documentSize" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="document_uri" jdbcType="VARCHAR" property="documentUri" />
+    <result column="download_times" jdbcType="INTEGER" property="downloadTimes" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, uploader_id, document_name, project_id, document_size, upload_time, document_uri, 
+    download_times
+  </sql>
+  
+  <sql id="query_document_where">
+	  	<if test="user_name != null">
+	  		and pu.user_name like '%${user_name}%'
+	  	</if>
+	  	<if test="document_name != null">
+	  	 	and di.document_name like '%${document_name}%'
+	  	</if>
+	  	<if test="project_name != null">
+	  		and pi.project_name like '%${project_name}%'
+	  	</if>
+  	order by di.create_time desc
+  </sql>
+  
+  <sql id="query_document_list">
+  	di.id, pu.user_name,di.document_name,pi.project_name,di.upload_time,di.document_size,di.document_uri,di.download_times
+    from document_info AS di join project_info AS pi on(di.project_id=pi.id) join portal_user AS pu on(di.uploader_id=pu.id)
+  </sql>
+  
+  <select id="selectByPage" parameterType="com.infrastructure.portal.entity.vo.QueryDocumentInfoVo" resultType="com.infrastructure.portal.entity.vo.QueryDocumentInfoVo">
+    select
+     <include refid="query_document_list" />   
+     <include refid="query_document_where" />
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from document_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getDownloadCounts" resultType="java.lang.Integer">
+  	select 
+  	sum(download_times) 
+  	from document_info
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from document_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.infrastructure.portal.entity.po.document.DocumentInfo">
+    insert into document_info (id, uploader_id, document_name, 
+      project_id, document_size, upload_time, 
+      document_uri, download_times, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{uploaderId,jdbcType=INTEGER}, #{documentName,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=INTEGER}, #{documentSize,jdbcType=INTEGER}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{documentUri,jdbcType=VARCHAR}, #{downloadTimes,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.infrastructure.portal.entity.po.document.DocumentInfo">
+    insert into document_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uploaderId != null">
+        uploader_id,
+      </if>
+      <if test="documentName != null">
+        document_name,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="documentSize != null">
+        document_size,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="documentUri != null">
+        document_uri,
+      </if>
+      <if test="downloadTimes != null">
+        download_times,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uploaderId != null">
+        #{uploaderId,jdbcType=INTEGER},
+      </if>
+      <if test="documentName != null">
+        #{documentName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="documentSize != null">
+        #{documentSize,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="documentUri != null">
+        #{documentUri,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadTimes != null">
+        #{downloadTimes,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>  
+    
+  <update id="updateByPrimaryKeySelective" parameterType="com.infrastructure.portal.entity.po.document.DocumentInfo">
+    update document_info
+    <set>
+      <if test="uploaderId != null">
+        uploader_id = #{uploaderId,jdbcType=INTEGER},
+      </if>
+      <if test="documentName != null">
+        document_name = #{documentName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="documentSize != null">
+        document_size = #{documentSize,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="documentUri != null">
+        document_uri = #{documentUri,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadTimes != null">
+        download_times = #{downloadTimes,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="java.lang.Integer">
+    update document_info
+    set uploader_id = #{uploaderId,jdbcType=INTEGER},
+      document_name = #{documentName,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      document_size = #{documentSize,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      document_uri = #{documentUri,jdbcType=VARCHAR},
+      download_times = #{downloadTimes,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="addDownloadTimes" parameterType="java.lang.Integer">
+  	update document_info 
+  	set download_times=download_times+1 
+  	where id= #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

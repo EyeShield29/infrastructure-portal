@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>已发送列表</title>
+<meta name="decorator" content="list" />
+
+</head>
+
+<body>
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+			<ul class="breadcrumb">
+				<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">首页</a>
+				</li>
+
+				<li><a href="#">站内信</a></li>
+				<li class="active">已发送列表</li>
+			</ul>
+			<!-- /.breadcrumb -->
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+			<!-- /section:settings.box -->
+			<div class="page-header">
+				<h1>
+					站内信 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+						已发送列表
+					</small>
+				</h1>
+			</div>
+			<!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+
+					<form class="form-inline" action="${ctx}/message/search_sent"
+						method="post">
+						<div class="row">
+							<div class="col-xs-12 col-sm-8">
+								<div class="input-group">
+									信件标题：<input name="messageTitle" value="${messageInfo.messageTitle}"
+										type="text" class="input-small" /> 
+									收件人账号：<input
+										name="receiverAccount" value="${messageInfo.receiverAccount}" type="text"
+										class="input-small" /> 
+									<button type="submit" class="btn btn-purple btn-sm">
+										查询 <i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+									<!-- <button class="btn btn-sm btn-purple" data-toggle="modal"
+										data-target="#modify_message-modal">
+										<i class="icon-edit bigger-120"></i>增加新用户
+									</button> -->
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+
+
+					<!-- <div class="table-responsive"> -->
+
+					<!-- <div class="dataTables_borderWrap"> -->
+					<div>
+						<table id="sample-table-1"
+							class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>编号</th>
+									<th>信件标题</th>
+									<th>接收人账号</th>
+									<th>发送时间</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<#list messageInfoList as message>
+								<tr>
+									<!-- <td class="center"><label> <input type="checkbox"
+														class="ace" /> <span class="lbl"></span>
+												</label></td> -->
+									<td>${message.id}</td>
+									<td><a href="${ctx}/message/show_message_info?id=${message.id}">${message.messageTitle}</a></td>
+									<td>${message.receiverAccount}</td>
+									<td>${message.sendTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+									<td>
+										<div class="hidden-sm hidden-xs action-buttons">
+											
+											<a class="red" href="javascript:void(0)"
+												onclick="deleteMessageInfo('${message.id}')"> <i
+												class="ace-icon fa fa-trash-o bigger-130"></i>
+											</a>
+										</div>
+
+									</td>
+								</tr>
+								</#list>
+							</tbody>
+						</table>
+					</div>
+					<#include "/common/common_page.html">
+				</div>
+			</div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+		<!-- /.col -->
+	
+	<!-- /.page-content -->
+	
+	<!-- basic scripts -->
+	<!-- <#include "/common/common_js.html"> -->
+
+
+	<script type="text/javascript">
+		function deleteMessageInfo(id) {
+			
+			/* $.messager.confirm("删除用户", "确定要删除该用户吗!", function() {
+				window.open("${ctx}/message/delete?id=" + id,"_self");
+			}); */
+			if(confirm("确定要删除该信件吗?")){
+				window.open("${ctx}/message/delete?id=" + id+"&type=1","_self");
+			}
+		}
+		
+	</script>
+</body>
+</html>

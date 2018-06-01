@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>附件列表</title>
+<meta name="decorator" content="list" />
+
+</head>
+
+<body>
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+
+			<ul class="breadcrumb">
+				<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">首页</a>
+				</li>
+
+				<li><a href="#">项目管理</a></li>
+				<li class="active">附件列表</li>
+			</ul>
+			<!-- /.breadcrumb -->
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+			<!-- /section:settings.box -->
+			<div class="page-header">
+				<h1>
+					项目管理 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+						附件列表
+					</small>
+				</h1>
+			</div>
+			<!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+
+					<form class="form-inline" action="${ctx}/document/search"
+						method="post">
+						<div class="row">
+							<div class="col-xs-12 col-sm-8">
+								<div class="input-group">
+									附件名称：<input name="documentName" value="${queryDocumentInfoVo.documentName}"
+										type="text" class="input-small" />  
+									项目名称：<input name="projectName" value="${queryDocumentInfoVo.projectName}"
+										type="text" class="input-small" />  
+									上传者名称：<input name="user_name" value="${queryDocumentInfoVo.user_name}"
+										type="text" class="input-small" />  
+									<button type="submit" class="btn btn-purple btn-sm">
+										查询 <i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+									<button class="btn btn-sm btn-purple" data-toggle="modal"
+										data-target="#upload_document-modal">
+										<i class="icon-edit bigger-120"></i>上传附件
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+
+
+					<!-- <div class="table-responsive"> -->
+
+					<!-- <div class="dataTables_borderWrap"> -->
+					<div>
+						<table id="sample-table-1"
+							class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<!-- <th>编号</th> -->
+									<th>附件名称</th>
+									<th>所属项目</th>
+									<th>上传用户</th>
+									<th>上传时间</th>
+									<th>文件大小</th>
+									<th>下载次数</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<#list documentInfoList as document>
+								<tr>
+									<!-- <td class="center"><label> <input type="checkbox"
+														class="ace" /> <span class="lbl"></span>
+												</label></td> -->
+									<!-- <td>${document.id}</td> -->
+									<td>${document.documentName}</td>
+									<td>${document.projectName}</td>
+									<td>${document.user_name}</td>
+									<td>${document.uploadTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+									<td>${document.documentSize}KB</td>
+									<td>${document.downloadTimes}</td>
+									<td>
+										<div class="hidden-sm hidden-xs action-buttons">
+											<a class="blue" href="${ctx}/common/fileDownload?fileUri=${document.documentUri}&fileName=${document.documentName}&documentId=${document.id}"> <i
+												class="icon-cloud-download bigger-130"></i>
+											</a> 
+											<a class="green" data-toggle="modal"
+												data-target="#upload_document-modal" href="javascript:void(0)"
+												onclick="modifyDocument('${document.id}','${document.documentName}','${document.projectName}')"> <i
+												class="ace-icon fa fa-pencil bigger-130"></i>
+											</a>
+											<a class="red" href="javascript:void(0)"
+												onclick="deleteDocument('${document.id}')"> <i
+												class="ace-icon fa fa-trash-o bigger-130"></i>
+											</a>
+										</div>
+
+									</td>
+								</tr>
+								</#list>
+							</tbody>
+						</table>
+					</div>
+					<#include "/common/common_page.html">
+				</div>
+			</div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+		<!-- /.col -->
+	<!-- /.page-content -->
+	
+		<div id="upload_document-modal" class="modal fade" tabindex="-1" function="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="blue bigger">上传附件</h4>
+					</div>
+					<div class="modal-body overflow-visible">
+						<form class="form-horizontal"
+						action="${ctx}/document/upload_document"
+						id="upload_document-form" method="post">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="from-group">
+									<label class="col-sm-3 control-label no-padding-right">附件名称:</label>
+											<div class="col-sm-7">
+												<input type="text" name="documentName" class="col-xs-10 col-sm-5"
+													value="" required />
+											</div>
+								</div>
+								<div class="space-4"></div>
+								<br>
+
+								<div class="from-group">
+									<label class="col-sm-3 control-label no-padding-right">选择文件:</label>
+									<div class="col-sm-7">
+												<input class="input-file uniform_on"
+											id="add_document-file" type="file"/> 
+									</div>
+								</div>
+								<div class="space-4"></div>
+
+								<div class="from-group">
+									<label class="col-sm-3 control-label no-padding-right">选择所属项目:</label>
+											<div class="col-sm-7">
+												<select name="projectId" class="select2"
+														data-placeholder="Click to Choose...">
+														<option value="">&nbsp;</option>
+														<#list projectList as project>
+														<option value="${project.id}">${project.projectName}(${project.projectNum})</option>
+														</#list>
+													</select>
+											</div>
+								</div>
+								
+								<div class="space-4"></div>
+
+								<div class="from-group">
+									<label class="col-sm-3 control-label no-padding-right">选择所属阶段:</label>
+											<div class="col-sm-7">
+												<select name="period" class="select2"
+														data-placeholder="Click to Choose...">
+													<option value="">&nbsp;</option>
+													<option value="1">立项</option>
+													<option value="2">设计</option>
+													<option value="3">预算清单</option>
+													<option value="4">招标</option>
+													<option value="5">施工监管</option>
+													<option value="6">结算</option>
+												</select>
+											</div>
+								</div>
+								<input type="hidden" id="add_document-fileUri" name="documentUri">
+								<input type="hidden" id="documentSize" name="documentSize">
+							</div>
+						</div>
+				</form>
+						
+						
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-sm btn-info"
+							onclick="$('#upload_document-form').submit();">
+							<i class="icon-ok"></i> 提交
+						</button>
+						<button class="btn btn-sm" data-dismiss="modal">
+							<i class="icon-remove"></i> 取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+	<!-- basic scripts -->
+	<!-- <#include "/common/common_js.html"> -->
+
+
+	<script type="text/javascript">
+		$(function() {
+				var document_info = {
+						init : function() {	
+						$('#add_document-file').uploadify(
+								{
+									'swf' : '${ctx}/static/swf/uploadify.swf',
+									'uploader':'${ctx}/common/fileupload',
+									'buttonText' : '选择要上传的文档',
+									'method' : 'post',
+									'fileTypeExts' : '*.*',
+									'fileObjName' : 'file',
+									'multi' : false,
+									'onUploadSuccess' : function(file, data, response) {
+										data = $.parseJSON(data);
+										if (data.status == 1) {
+											$('#add_document-fileUri').val(
+													data.data.fileuri);
+											$('#documentSize').val(
+															data.data.size);
+										} else {
+											alert(data.errormsg);
+										}
+									},
+								});
+						}
+					};
+				document_info.init();
+				$("#upload_document-form").validate();
+				$("#upload_document-form").bind(
+						'submit',
+						function() {
+							//校验表单
+							if (!$(this).valid()) {
+								return false;
+							}
+							ajaxSubmit(this, function(response) {
+								response = $.parseJSON(response);
+								if (response.status == 1) {
+									alert("上传成功！");
+									window.location.reload();
+								} else {
+									alert(response.errormsg);
+								}
+							});
+							return false;
+						});
+		});
+		function deleteDocument(id) {
+			
+			/* $.messager.confirm("删除用户", "确定要删除该用户吗!", function() {
+				window.open("${ctx}/portal_user/delete?id=" + id,"_self");
+			}); */
+			if(confirm("确定要删除该附件吗?")){
+				window.open("${ctx}/document/delete?id=" + id,"_self");
+			}
+		}
+		
+		function modifyDocument(id, documentName, projectName) {
+			//alert(id+","+period+","+periodNmae+","+functionName+","+description);
+			$("#documentName").val(documentName);
+			$("#functionName").val(functionName);
+			$("#permission").val(permission);
+		}
+		</script>
+</body>
+</html>

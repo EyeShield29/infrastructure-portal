@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/views">
+	
+	<!-- 默认装饰页面, 在需要装饰的页面增加<meta name="decorator" content="default"/> -->
+	<decorator name="default" page="layouts/default.jsp" />
+	<decorator name="home" page="layouts/home.jsp" />
+	<decorator name="list" page="layouts/list.jsp" />
+	<decorator name="form" page="layouts/form.jsp" />
+	<decorator name="wizard" page="layouts/wizard.jsp" />
+</decorators>

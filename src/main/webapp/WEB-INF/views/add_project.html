@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>新增项目</title>
+<meta name="decorator" content="wizard" />
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li><a href="#">项目管理</a></li>
+			<li class="active">新增项目</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				项目管理 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增项目
+				</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+
+				<div class="widget-box">
+					<div class="widget-header widget-header-blue widget-header-flat">
+						<h4 class="widget-title lighter">项目录入</h4>
+
+						<!-- <div class="widget-toolbar">
+							<label> <small class="green"> <b>Validation</b>
+							</small> <input id="skip-validation" type="checkbox"
+								class="ace ace-switch ace-switch-4" /> <span class="lbl middle"></span>
+							</label>
+						</div> -->
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<!-- #section:plugins/fuelux.wizard -->
+							<div id="fuelux-wizard-container">
+								<div>
+									<!-- #section:plugins/fuelux.wizard.steps -->
+									<ul class="steps">
+										<li data-step="1" class="active"><span class="step">1</span>
+											<span class="title">项目基本信息</span></li>
+
+										<li data-step="2"><span class="step">2</span> <span
+											class="title">项目流程配置</span></li>
+											
+										<li data-step="3"><span class="step">3</span> <span
+											class="title">项目各阶段信息</span></li>
+
+									</ul>
+
+									<!-- /section:plugins/fuelux.wizard.steps -->
+								</div>
+
+								<hr />
+
+								<!-- #section:plugins/fuelux.wizard.container -->
+								<div class="step-content pos-rel">
+									<div class="step-pane active" data-step="1">
+										<h3 class="lighter block green">输入项目基本信息</h3>
+
+										
+										<form class="form-horizontal" id="validation-form" method="post" action="${ctx}/project/addProjectInfo">
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="password">项目名称:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input type="text" name="projectName" id="projectName"
+															class="col-xs-12 col-sm-4" />
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="email">项目编号:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input type="text" name="projectNum" id="projectNum"
+															class="col-xs-12 col-sm-6" />
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="state">项目类型:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<select id="typeName" name="typeName" class="select2"
+														data-placeholder="Click to Choose...">
+														<option value="">&nbsp;</option>
+														<#list typeList as type>
+														<option value="${type.typeName}">${type.typeName}</option>
+														</#list>
+													</select>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="state">项目负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<select id="leaderId" name="leaderId" class="select2"
+														data-placeholder="Click to Choose...">
+														<option value="">&nbsp;</option>
+														<#list userList as user>
+															<option value="${user.id}">${user.account}(${user.userName})</option>
+														</#list>
+													</select>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="name">工程公司名称:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input type="text" id="company" name="company"
+															class="col-xs-12 col-sm-5" />
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="comment">项目简述:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<textarea class="input-xlarge" name="description" id="description"></textarea>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="id-date-picker-1">项目起始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="project_start_date" type="text" name="project_start_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="id-date-picker-1">项目完成时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="project_end_date" type="text" name="project_end_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="clearfix form-actions">
+												<div class="col-md-offset-3 col-md-9">
+													<button class="btn btn-info" id="btnOne">
+														<i class="ace-icon fa fa-check bigger-110"></i> 提交
+													</button>
+
+													&nbsp; &nbsp; &nbsp;
+													<button class="btn" type="reset" id="resetOne">
+														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+													</button>
+												</div>
+											</div>
+
+											<div class="space-8"></div>
+
+										</form>
+									</div>
+
+									<div class="step-pane" data-step="2">
+										<h3 class="lighter block green">选择项目每一阶段所需流程</h3>
+										
+										<form class="form-horizontal" id="process-form"
+											method="post" action="${ctx}/project/addProjectProcess">
+											
+											<input type="hidden" id="projectID" name="projectID"
+															class="col-xs-12 col-sm-5" />
+															
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right">阶段一</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<#list processList1 as process1>
+													<div>
+														<label> <input name="period1[]" value="${process1.processName}"
+															type="checkbox" class="ace" /> <span class="lbl">
+																${process1.processName}[${process1.description}]</span>
+														</label>
+													</div>
+													</#list>
+												</div>
+											</div>
+											
+											<div class="hr hr-dotted"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right">阶段二</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<#list processList2 as process2>
+													<div>
+														<label> <input name="period2[]" value="${process2.processName}"
+															type="checkbox" class="ace" /> <span class="lbl">
+																${process2.processName}</span>
+														</label>
+													</div>
+													</#list>
+												</div>
+											</div>
+											
+											<div class="hr hr-dotted"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right">阶段三</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<#list processList3 as process3>
+													<div>
+														<label> <input name="period3[]" value="${process3.processName}"
+															type="checkbox" class="ace" /> <span class="lbl">
+																${process3.processName}[${process3.description}]</span>
+														</label>
+													</div>
+													</#list>
+												</div>
+											</div>
+											
+											<div class="hr hr-dotted"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right">阶段四</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<#list processList4 as process4>
+													<div>
+														<label> <input name="period4[]" value="${process4.processName}"
+															type="checkbox" class="ace" /> <span class="lbl">
+																${process4.processName}[${process4.description}]</span>
+														</label>
+													</div>
+													</#list>
+												</div>
+											</div>
+											
+											<div class="hr hr-dotted"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right">阶段五</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<#list processList5 as process5>
+													<div>
+														<label> <input name="period5[]" value="${process5.processName}"
+															type="checkbox" class="ace" /> <span class="lbl">
+																${process5.processName}[${process5.description}]</span>
+														</label>
+													</div>
+													</#list>
+												</div>
+											</div>
+											
+											<div class="hr hr-dotted"></div>
+											
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right">阶段六</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<#list processList6 as process6>
+													<div>
+														<label> <input name="period6[]" value="${process6.processName}"
+															type="checkbox" class="ace" /> <span class="lbl">
+																${process6.processName}[${process6.description}]</span>
+														</label>
+													</div>
+													</#list>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="clearfix form-actions">
+												<div class="col-md-offset-3 col-md-9">
+													<button class="btn btn-info" id="btnTwo">
+														<i class="ace-icon fa fa-check bigger-110"></i> 提交
+													</button>
+
+													&nbsp; &nbsp; &nbsp;
+													<button class="btn" type="reset" id="resetOne">
+														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+													</button>
+												</div>
+											</div>
+										</form>
+									</div>
+
+									<div class="step-pane" data-step="3">
+										<div class="center">
+											<h3 class="green">输入项目各阶段负责人及起始时间：</h3>
+											<form class="form-horizontal" id="project_period_info-form" method="post" action="${ctx}/project/addProjectPeriod">
+											
+											<div class="hr hr-dotted"></div>
+											<input type="hidden" name="periods[0].projectId"
+															class="col-xs-12 col-sm-5 projectID2" />
+											<input type="hidden" id="period" name="periods[0].period" value="1"
+															class="col-xs-12 col-sm-5" />
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodLeaderId1">立项阶段负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<select id="periods[0].periodLeaderId" name="periods[0].periodLeaderId" class="select2"
+														data-placeholder="Click to Choose...">
+															<option value="">&nbsp;</option>
+															<#list userList as user>
+																<option value="${user.id}">${user.account}(${user.userName})</option>
+															</#list>
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodStartDate1">立项阶段开始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodStartDate1" type="text" name="periods[0].periodStartDate"/>
+													</div>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodEndDate1">立项阶段结束时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodEndDate1" type="text" name="periods[0].periodEndDate"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr-dotted"></div>
+											<input type="hidden" name="periods[1].project_id"
+															class="col-xs-12 col-sm-5 projectID2" />
+											<input type="hidden" id="period" name="periods[1].period" value="2"
+															class="col-xs-12 col-sm-5" />
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodLeaderId2">设计阶段负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<select id="periodLeaderId2" name="periods[1].periodLeaderId" class="select2"
+														data-placeholder="Click to Choose...">
+															<option value="">&nbsp;</option>
+															<#list userList as user>
+																<option value="${user.id}">${user.account}(${user.userName})</option>
+															</#list>
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodStartDate2">设计阶段开始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodStartDate2" type="text" name="periods[1].period_start_date"/>
+													</div>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodEndDate2">设计阶段结束时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodEndDate2" type="text" name="periods[1].period_end_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr-dotted"></div>
+											<input type="hidden" name="periods[2].project_id"
+															class="col-xs-12 col-sm-5 projectID2" />
+											<input type="hidden" id="period" name="periods[2].period" value="3"
+															class="col-xs-12 col-sm-5" />
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodLeaderId3">预算清单阶段负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<select id="periodLeaderId3" name="periods[2].period_leader_id" class="select2"
+														data-placeholder="Click to Choose...">
+															<option value="">&nbsp;</option>
+															<#list userList as user>
+																<option value="${user.id}">${user.account}(${user.userName})</option>
+															</#list>
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodStartDate3">预算清单阶段开始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodStartDate3" type="text" name="periods[2].period_start_date"/>
+													</div>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodEndDate3">预算清单阶段结束时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodEndDate3" type="text" name="periods[2].period_end_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr-dotted"></div>
+											<input type="hidden" name="periods[3].project_id"
+															class="col-xs-12 col-sm-5 projectID2" />
+											<input type="hidden" id="period" name="periods[3].period" value="4"
+															class="col-xs-12 col-sm-5" />
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodLeaderId4">招标阶段负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<select id="periodLeaderId4" name="periods[3].period_leader_id" class="select2"
+														data-placeholder="Click to Choose...">
+															<option value="">&nbsp;</option>
+															<#list userList as user>
+																<option value="${user.id}">${user.account}(${user.userName})</option>
+															</#list>
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodStartDate4">招标阶段开始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodStartDate4" type="text" name="periods[3].period_start_date"/>
+													</div>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodEndDate4">招标阶段结束时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodEndDate4" type="text" name="periods[3].period_end_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr-dotted"></div>
+											<input type="hidden" name="periods[4].project_id"
+															class="col-xs-12 col-sm-5 projectID2" />
+											<input type="hidden" id="period" name="periods[4].period" value="5"
+															class="col-xs-12 col-sm-5" />
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodLeaderId5">施工监管阶段负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<select id="periodLeaderId5" name="periods[4].period_leader_id" class="select2"
+														data-placeholder="Click to Choose...">
+															<option value="">&nbsp;</option>
+															<#list userList as user>
+																<option value="${user.id}">${user.account}(${user.userName})</option>
+															</#list>
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodStartDate5">施工监管阶段开始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodStartDate5" type="text" name="periods[4].period_start_date"/>
+													</div>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodEndDate5">施工监管阶段结束时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodEndDate5" type="text" name="periods[4].period_end_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr-dotted"></div>
+											<input type="hidden" name="periods[5].project_id"
+															class="col-xs-12 col-sm-5 projectID2" />
+											<input type="hidden" id="period" name="periods[5].period" value="6"
+															class="col-xs-12 col-sm-5" />
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodLeaderId6">结算阶段负责人:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<select id="periodLeaderId6" name="periods[5].period_leader_id" class="select2"
+														data-placeholder="Click to Choose...">
+															<option value="">&nbsp;</option>
+															<#list userList as user>
+																<option value="${user.id}">${user.account}(${user.userName})</option>
+															</#list>
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodStartDate6">结算阶段开始时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodStartDate6" type="text" name="periods[5].period_start_date"/>
+													</div>
+												</div>
+											</div>
+											
+											<div class="space-2"></div>
+
+											<div class="form-group">
+												<label
+													class="control-label col-xs-12 col-sm-3 no-padding-right"
+													for="periodEndDate6">结算阶段结束时间:</label>
+
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input class="datepicker" id="periodEndDate6" type="text" name="periods[5].period_end_date"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr-dotted"></div>
+
+											<div class="space-2"></div>
+
+											<div class="clearfix form-actions">
+												<div class="col-md-offset-3 col-md-9">
+													<button class="btn btn-info" id="btnThree">
+														<i class="ace-icon fa fa-check bigger-110"></i> 提交
+													</button>
+
+													&nbsp; &nbsp; &nbsp;
+													<button class="btn" type="reset" id="resetThree">
+														<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+													</button>
+												</div>
+											</div>
+
+											<div class="space-8"></div>
+											
+											
+
+										</form>
+										</div>
+									</div>
+								</div>
+
+								<!-- /section:plugins/fuelux.wizard.container -->
+							</div>
+
+							<hr />
+							<div class="wizard-actions">
+								<!-- #section:plugins/fuelux.wizard.buttons -->
+								<button class="btn btn-prev">
+									<i class="ace-icon fa fa-arrow-left"></i> 上一步
+								</button>
+
+								<button class="btn btn-success btn-next" data-last="完成">
+									下一步 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+								</button>
+
+								<!-- /section:plugins/fuelux.wizard.buttons -->
+							</div>
+
+							<!-- /section:plugins/fuelux.wizard -->
+						</div>
+						<!-- /.widget-main -->
+					</div>
+					<!-- /.widget-body -->
+				</div>
+
+				<div id="modal-wizard" class="modal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div id="modal-wizard-container">
+								<div class="modal-header">
+									<ul class="steps">
+										<li data-step="1" class="active"><span class="step">1</span>
+											<span class="title">项目基本信息</span></li>
+
+										<li data-step="2"><span class="step">2</span> <span
+											class="title">项目流程配置</span></li>
+
+										<li data-step="4"><span class="step">3</span> <span
+											class="title">项目各阶段信息</span></li>
+									</ul>
+								</div>
+
+								<div class="modal-body step-content">
+									<div class="step-pane active" data-step="1">
+										<div class="center">
+											<h4 class="blue">项目基本信息</h4>
+										</div>
+									</div>
+
+									<div class="step-pane" data-step="2">
+										<div class="center">
+											<h4 class="blue">项目流程配置</h4>
+										</div>
+									</div>
+
+									<div class="step-pane" data-step="3">
+										<div class="center">
+											<h4 class="blue">项目各阶段信息</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-footer wizard-actions">
+								<button class="btn btn-sm btn-prev">
+									<i class="ace-icon fa fa-arrow-left"></i> 上一步
+								</button>
+
+								<button class="btn btn-success btn-sm btn-next"
+									data-last="完成">
+									下一步 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+								</button>
+
+								<button class="btn btn-danger btn-sm pull-left"
+									data-dismiss="modal">
+									<i class="ace-icon fa fa-times"></i> 取消
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- PAGE CONTENT ENDS -->
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+
+	<script type="text/javascript">
+	
+		jQuery(function($) {
+			$(".datepicker").datepicker({
+	            language: "zh-CN",
+	            autoclose: true,//选中之后自动隐藏日期选择框
+	            clearBtn: true,//清除按钮
+	            format: "yyyy-mm-dd"//日期格式，详见 http://bootstrap-datepicker.readthedocs.org/en/release/options.html#format
+	        });
+			
+			
+			$('[data-rel=tooltip]').tooltip();
+
+			$(".select2").css('width', '200px').select2({
+				allowClear : true
+			}).on('change', function() {
+				$(this).closest('form').validate().element($(this));
+			});
+
+			$('#fuelux-wizard-container')
+					.ace_wizard({
+					//step: 2 //optional argument. wizard will jump to step "2" at first
+					//buttons: '.wizard-actions:eq(0)'
+					})
+					.on('actionclicked.fu.wizard', function(e, info) {
+						if (info.step == 1 ) {
+							if (!$('#validation-form').valid())
+								e.preventDefault();
+						}
+						else if (info.step == 2 ) {
+							if (!$('#process-form').valid())
+								e.preventDefault();
+						}
+					})
+					.on(
+							'finished.fu.wizard',
+							function(e) {
+								bootbox
+										.dialog({
+											message : "项目信息已录入完毕!",
+											buttons : {
+												"success" : {
+													"label" : "OK",
+													"className" : "btn-sm btn-primary"
+												}
+											}
+										});
+							}).on('stepclick.fu.wizard', function(e) {
+						//e.preventDefault();//this will prevent clicking and selecting steps
+					});
+
+			//jump to a step
+			/**
+			var wizard = $('#fuelux-wizard-container').data('fu.wizard')
+			wizard.currentStep = 3;
+			wizard.setState();
+			 */
+
+			//determine selected step
+			//wizard.selectedItem().step
+			//hide or show the other form which requires validation
+			//this is for demo only, you usullay want just one form in your application
+
+			//documentation : http://docs.jquery.com/Plugins/Validation/validate
+
+			$('#validation-form')
+					.validate(
+							{
+								errorElement : 'div',
+								errorClass : 'help-block',
+								focusInvalid : false,
+								ignore : "",
+								rules : {
+									project_name : {
+										required : true,
+									},
+									project_num : {
+										required : true,
+									},
+									type_name : {
+										required : true,
+									},
+									leader_id : {
+										required : true,
+									},
+									company : {
+										required : true,
+									},
+									description : {
+										required : true,
+									},
+									period1 : {
+										required : true,
+									},
+									period2 : {
+										required : true,
+									},
+									period3 : {
+										required : true,
+									},
+									period4 : {
+										required : true,
+									},
+									period5 : {
+										required : true,
+									},
+									period6 : {
+										required : true,
+									}
+								},
+
+								messages : {
+									project_name: "请输入项目名称！",
+									project_num: "请输入项目编号",
+									leader_id: "请选择项目负责人！",
+									type_name: "请选择项目类型",
+									company: "请输入项目负责的工程公司！",
+									description: "请输入项目简要描述！",
+									period1: "请选择阶段一流程！",
+									period2: "请选择阶段二流程！",
+									period3: "请选择阶段三流程！",
+									period4: "请选择阶段四流程！",
+									period5: "请选择阶段五流程！",
+									period6: "请选择阶段六流程！"
+								},
+
+								highlight : function(e) {
+									$(e).closest('.form-group').removeClass(
+											'has-info').addClass('has-error');
+								},
+
+								success : function(e) {
+									$(e).closest('.form-group').removeClass(
+											'has-error');//.addClass('has-info');
+									$(e).remove();
+								},
+
+								errorPlacement : function(error, element) {
+									if (element.is('input[type=checkbox]')
+											|| element.is('input[type=radio]')) {
+										var controls = element
+												.closest('div[class*="col-"]');
+										if (controls.find(':checkbox,:radio').length > 1)
+											controls.append(error);
+										else
+											error.insertAfter(element.nextAll(
+													'.lbl:eq(0)').eq(0));
+									} else if (element.is('.select2')) {
+										error
+												.insertAfter(element
+														.siblings('[class*="select2-container"]:eq(0)'));
+									} else if (element.is('.chosen-select')) {
+										error
+												.insertAfter(element
+														.siblings('[class*="chosen-container"]:eq(0)'));
+									} else
+										error.insertAfter(element.parent());
+								},
+
+								submitHandler : function(form) {
+								},
+								invalidHandler : function(form) {
+								}
+							});
+
+			$('#modal-wizard-container').ace_wizard();
+			$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]')
+					.removeAttr('disabled');
+
+			/**
+			$('#date').datepicker({autoclose:true}).on('changeDate', function(ev) {
+				$(this).closest('form').validate().element($(this));
+			});
+			
+			$('#mychosen').chosen().on('change', function(ev) {
+				$(this).closest('form').validate().element($(this));
+			});
+			 */
+
+			$(document).one('ajaxloadstart.page', function(e) {
+				//in ajax mode, remove remaining elements before leaving page
+				$('[class*=select2]').remove();
+			});
+			 
+			$("#validation-form").validate();
+			$("#validation-form").bind(
+					'submit',
+					function() {
+						//校验表单
+						if (!$(this).valid()) {
+							return false;
+						}
+						ajaxSubmit(this, function(response) {
+							response = $.parseJSON(response);
+							if (response.status == 1) {
+								$('#projectID').val(response.data.projectId);
+								$('.projectID2').val(response.data.projectId);
+								alert("添加成功！");
+								$("#btnOne").attr("disabled", true); 
+								$("#resetOne").attr("disabled", true); 
+								//window.open("${ctx}/portal_user/show_user_list");
+								//window.location.reload();
+							} else {
+								alert(response.errormsg);
+							}
+						});
+						return false;
+					});
+			
+			$("#process-form").validate();
+			$("#process-form").bind(
+					'submit',
+					function() {
+						//校验表单
+						if (!$(this).valid()) {
+							return false;
+						}
+						ajaxSubmit(this, function(response) {
+							response = $.parseJSON(response);
+							if (response.status == 1) {
+								alert("添加成功！");
+								$("#btnTwo").attr("disabled", true); 
+								$("#resetTwo").attr("disabled", true); 
+								//window.open("${ctx}/portal_user/show_user_list");
+								//window.location.reload();
+							} else {
+								alert(response.errormsg);
+							}
+						});
+						return false;
+					});
+			$("#project_period_info-form").validate();
+			$("#project_period_info-form").bind(
+					'submit',
+					function() {
+						//校验表单
+						if (!$(this).valid()) {
+							return false;
+						}
+						ajaxSubmit(this, function(response) {
+							response = $.parseJSON(response);
+							if (response.status == 1) {
+								alert("添加成功！");
+								$("#btnThree").attr("disabled", true); 
+								$("#resetThree").attr("disabled", true); 
+								//window.open("${ctx}/portal_user/show_user_list");
+								//window.location.reload();
+							} else {
+								alert(response.errormsg);
+							}
+						});
+						return false;
+					});
+		})
+	</script>
+</body>
+</html>

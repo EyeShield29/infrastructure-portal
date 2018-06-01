@@ -1,0 +1,30 @@
+
+<div class="row">
+	<div class="col-sm-6">当前显示第${pageInfo.pageNum}页(${pageInfo.startRow}-${pageInfo.pageSize}),
+		共${pageInfo.pages}页,${pageInfo.total}条 , 每页${pageInfo.pageSize}条</div>
+	<div class="col-sm-6">
+		<ul class="pagination">
+			<li <#if (pageInfo.pageNum==1)>class="disabled"</#if>> <a
+				href="${ctx}${pageuri}pageid=1"> <i
+					class="icon-double-angle-left"></i>
+			</a>
+			</li> <#if (pageInfo.pageNum gt 2)>
+			<li><a href="${ctx}${pageuri}pageid=${pageInfo.pageNum-2}">${pageInfo.pageNum-2}</a>
+			</li> </#if> <#if (pageInfo.pageNum gt 1)>
+			<li><a href="${ctx}${pageuri}pageid=${pageInfo.pageNum-1}">${pageInfo.pageNum-1}</a>
+			</li> </#if>
+			<li class="active"><a
+				href="${ctx}${pageuri}pageid=${pageInfo.pageNum}">${pageInfo.pageNum}</a>
+			</li> <#if (pageInfo.pages-pageInfo.pageNum gt 0)>
+			<li><a href="${ctx}${pageuri}pageid=${pageInfo.pageNum+1}">${pageInfo.pageNum+1}</a>
+			</li> </#if> <#if (pageInfo.pages-pageInfo.pageNum gt 1)>
+			<li><a href="${ctx}${pageuri}pageid=${pageInfo.pageNum+2}">${pageInfo.pageNum+2}</a>
+			</li> </#if>
+			<li<#if (pageInfo.pageNum==pageInfo.pages)> class="disabled"</#if>> <a
+				href="${ctx}${pageuri}pageid=${pageInfo.pages}"> <i
+					class="icon-double-angle-right"></i>
+			</a>
+			</li>
+		</ul>
+	</div>
+</div>

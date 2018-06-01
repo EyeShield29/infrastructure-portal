@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.config.ProcessConfigMapper">
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.config.ProcessConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="period_name" jdbcType="VARCHAR" property="periodName" />
+    <result column="process_name" jdbcType="VARCHAR" property="processName" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    id, period, period_name, process_name, serial_num, description, create_time, update_time
+  </sql>
+  
+  <sql id="query_processconfig_where">
+  	<where>
+  		<if test="period != null">
+  			and period = #{period}
+  		</if>
+  		<if test="processName != null">
+  			and process_name like '%${processName}%'
+  		</if>
+  	</where>
+  	order by period,serial_num
+  </sql>
+  
+  <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from process_config
+    <include refid="query_processconfig_where" />
+  </select>	
+  	
+  <select id="queryProcessConfigList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from process_config
+    where period= #{period} 
+    order by serial_num
+  </select>
+  
+  <select id="getProcessList" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from process_config
+    where period= #{period} and serial_num= #{serialNum}
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from process_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteProcessConfigById" parameterType="java.lang.Integer">
+    delete from process_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.infrastructure.portal.entity.po.config.ProcessConfig">
+    insert into process_config (id, period, period_name, 
+      process_name, serial_num, description, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{periodName,jdbcType=VARCHAR}, 
+      #{processName,jdbcType=VARCHAR}, #{serialNum,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="addProcessConfig" parameterType="com.infrastructure.portal.entity.po.config.ProcessConfig">
+    insert into process_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="periodName != null">
+        period_name,
+      </if>
+      <if test="processName != null">
+        process_name,
+      </if>
+      <if test="serialNum != null">
+        serial_num,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="periodName != null">
+        #{periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="processName != null">
+        #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNum != null">
+        #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="modifyProcessConfig" parameterType="com.infrastructure.portal.entity.po.config.ProcessConfig">
+    update process_config
+    <set>
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="periodName != null">
+        period_name = #{periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="processName != null">
+        process_name = #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNum != null">
+        serial_num = #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.infrastructure.portal.entity.po.config.ProcessConfig">
+    update process_config
+    set period = #{period,jdbcType=INTEGER},
+      period_name = #{periodName,jdbcType=VARCHAR},
+      process_name = #{processName,jdbcType=VARCHAR},
+      serial_num = #{serialNum,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

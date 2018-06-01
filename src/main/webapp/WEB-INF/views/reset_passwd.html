@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>新增用户</title>
+<meta name="decorator" content="form" />
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li class="active">修改密码</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				修改密码&nbsp; &nbsp; &nbsp; 
+			</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-horizontal" id="modify_passwd-form"
+					action="${ctx}/portal_user/modify_passwd" method="post">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right"
+							for="oldPasswd">原密码:</label>
+
+						<div class="col-xs-12 col-sm-9">
+							<div class="clearfix">
+								<input type="password" name="oldPasswd"
+									class="col-xs-12 col-sm-6" />
+							</div>
+						</div>
+					</div>
+
+					<div class="space-2"></div>
+
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right"
+							for="newPasswd">新密码:</label>
+
+						<div class="col-xs-12 col-sm-9">
+							<div class="clearfix">
+								<input type="password" name="newPasswd"
+									class="col-xs-12 col-sm-4" />
+							</div>
+						</div>
+					</div>
+
+
+					<div class="space-2"></div>
+
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right"
+							for="rePasswd">重复新密码:</label>
+
+						<div class="col-xs-12 col-sm-9">
+							<div class="clearfix">
+								<input type="password" name="rePasswd"
+									class="col-xs-12 col-sm-5" />
+							</div>
+						</div>
+					</div>
+
+					<div class="space-2"></div>
+
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info" id="btnOne">
+								<i class="ace-icon fa fa-check bigger-110"></i> 提交
+							</button>
+
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset" id="resetOne">
+								<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+							</button>
+						</div>
+					</div>
+
+					<div class="space-8"></div>
+
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /.page-content -->
+	
+	<script type="text/javascript">
+		$(function() {
+			$("#modify_passwd-form").validate();
+			$("#modify_passwd-form").bind('submit', function() {
+				//校验表单
+				if (!$(this).valid()) {
+					return false;
+				}
+				ajaxSubmit(this, function(response) {
+					response = $.parseJSON(response);
+					if (response.status == 1) {
+						alert("密码修改成功！");
+						window.location.reload();
+					} else {
+						alert(response.errormsg);
+					}
+				});
+				return false;
+			});
+		});
+		function modifyPortalUser(id, account, role, roleId, user_name, sex,
+				phoneNum, email) {
+			//alert(id + "," + account + "," + role + "," + user_name + "," + sex + "," + phoneNum + "," + email);
+			$("#id").val(id);
+			$("#account").val(account);
+			$("#userName").val(user_name);
+			$("#phoneNum").val(phoneNum);
+			$("#email").val(email);
+			if (1 == sex) {
+				$("#sex").val("1");
+			} else if (0 == sex) {
+				$("#sex").val("0");
+			}
+			$("#roleName").val(role);
+		}
+	</script>
+</body>
+</html>

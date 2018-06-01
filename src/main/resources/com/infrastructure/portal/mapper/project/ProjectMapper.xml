@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.project.ProjectMapper">
+  
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.project.ProjectInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_num" jdbcType="VARCHAR" property="projectNum" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="entry_staff_account" jdbcType="VARCHAR" property="entryStaffAccount" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="leader_id" jdbcType="INTEGER" property="leaderId" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="project_start_date" jdbcType="DATE" property="projectStartDate" />
+    <result column="project_end_date" jdbcType="DATE" property="projectEndDate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="PeriodResultMap" type="com.infrastructure.portal.entity.po.project.ProjectPeriod">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="period_name" jdbcType="VARCHAR" property="periodName" />
+    <result column="period_leader_id" jdbcType="INTEGER" property="periodLeaderId" />
+    <result column="period_start_date" jdbcType="DATE" property="periodStartDate" />
+    <result column="period_end_date" jdbcType="DATE" property="periodEndDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="ProcessResultMap" type="com.infrastructure.portal.entity.po.project.ProjectProcess">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="process_name" jdbcType="VARCHAR" property="processName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="ProjectVoResultMap" type="com.infrastructure.portal.entity.vo.QueryProjectVo">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_num" jdbcType="VARCHAR" property="projectNum" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="entry_staff_account" jdbcType="VARCHAR" property="entryStaffAccount" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="leader_id" jdbcType="INTEGER" property="leaderId" />
+    <result column="user_name" jdbcType="INTEGER" property="userName" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="project_start_date" jdbcType="DATE" property="projectStartDate" />
+    <result column="project_end_date" jdbcType="DATE" property="projectEndDate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="WorkVoResultMap" type="com.infrastructure.portal.entity.vo.QueryWorkVo">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_num" jdbcType="VARCHAR" property="projectNum" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="period_leader_id" jdbcType="INTEGER" property="periodLeaderId" />
+    <result column="period_name" jdbcType="VARCHAR" property="periodName" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="period_start_date" jdbcType="DATE" property="periodStartDate" />
+    <result column="period_end_date" jdbcType="DATE" property="periodEndDate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="ProjectInfoVoResultMap" type="com.infrastructure.portal.entity.vo.ListProjectInfoVo">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_num" jdbcType="VARCHAR" property="projectNum" />
+  </resultMap>
+  
+  <resultMap id="ProcessProgressVoResultMap" type="com.infrastructure.portal.entity.vo.ProcessProgressVo">
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="process_name" jdbcType="VARCHAR" property="processName" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, project_name, project_num, type_name, entry_staff_account, description, leader_id, 
+    company, status, project_start_date, project_end_date, create_time, update_time
+  </sql>
+  
+  <sql id="Period_Column_List">
+    id, project_id, period, period_name, period_leader_id, period_start_date, period_end_date, 
+    status, create_time, update_time
+  </sql>
+  
+  <sql id="Process_Column_List">
+    id, project_id, process_name, description, period, serial_num, remark, status, create_time, 
+    update_time
+  </sql>
+  
+  <select id="getProjectById" parameterType="java.lang.Integer" resultMap="ProjectVoResultMap">
+  	select 
+  	pi.id, pi.project_name, pi.project_num, pi.type_name, pi.entry_staff_account, pi.description, pi.leader_id, pu.user_name, pi.company, pi.status, pi.project_start_date, pi.project_end_date, pi.create_time, pi.update_time 
+  	from project_info as pi join portal_user as pu 
+  	on(pi.leader_id=pu.id) 
+  	where pi.id=#{id}
+  </select>
+  
+  <select id="listProjectProcess" parameterType="java.lang.Integer" resultMap="ProcessResultMap">
+  	select 
+  	<include refid="Process_Column_List" />
+  	from project_process 
+  	where project_id=#{projectId} 
+  	order by period, serial_num
+  </select>
+  
+  <select id="checkUnfinishProcess" resultType="java.lang.Integer">
+  	select 
+	<include refid="Process_Column_List" /> 
+  	from project_process 
+  	where project_id=#{projectId} and period=#{period} and status=0
+  </select>
+  
+  <select id="queryProjectByPage" parameterType="com.infrastructure.portal.entity.vo.QueryProjectVo" resultMap="ProjectVoResultMap">
+  	SELECT pi.id, pi.project_name, pi.project_num, pi.type_name, pi.entry_staff_account, pi.description, pu.user_name, pi.company, pi.status, pi.project_start_date, pi.project_end_date, pi.create_time, pi.update_time 
+  	from project_info as pi join portal_user as pu on(pi.leader_id=pu.id)
+  	<where>
+  		<if test="projectName != null">
+  			and pi.project_name like '%${projectName}%'
+  		</if>
+  		<if test="projectNum != null">
+  			and pi.project_num like '%${projectNum}%'
+  		</if>
+  		<if test="typeName != null">
+  			and pi.type_name like '%${typeName}%'
+  		</if>
+  		<if test="entryStaffAccount != null">
+  			and pi.entry_staff_account like '%${entryStaffAccount}%'
+  		</if>
+  		<if test="userName != null">
+  			and pu.user_name like '%${userName}%'
+  		</if>
+  		<if test="status != null">
+  			and pi.status = #{status}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="queryProjectProcess" parameterType="java.lang.Integer" resultMap="ProcessResultMap">
+  	SELECT 
+  	<include refid="Process_Column_List" />
+  	from project_process 
+  	WHERE project_id=projectId 
+  	order by period,serial_num
+  </select>
+  
+  <select id="queryProjectProcessList" resultMap="ProcessResultMap">
+  	select 
+ 	<include refid="Process_Column_List" />
+  	from project_process 
+  	where project_id=#{projectId} and period=#{period} 
+  	order by serial_num
+  </select>
+  
+  <select id="projectTotalCount" resultType="java.lang.Integer">
+  	select 
+  	count(*)
+  	from project_info
+  </select>
+  <select id="queryOnProjectProcess" resultMap="ProcessResultMap">
+  	select 
+ 	<include refid="Process_Column_List" />
+  	from project_process 
+  	where project_id=#{projectId} and period=#{period} 
+  	and status=0 order by serial_num limit 1
+  </select>
+  
+  <select id="queryProjectVoList" parameterType="java.lang.Integer" resultMap="ProjectInfoVoResultMap">
+  	select 
+  	distinct 
+  	pi.id, pi.project_name, pi.project_num 
+  	from project_info as pi join project_period as pp 
+  	on(pi.id=pp.project_id) 
+  	where pp.period_leader_id=#{id} 
+  	order by project_num
+  </select>
+  
+  <select id="queryPeriodCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select count(id) 
+  	from project_info 
+  	where status=#{period}
+  </select>
+  
+  <select id="queryPeriodCountList" resultType="com.infrastructure.portal.entity.vo.ProjectCountVo">
+  	select 
+  	status,count(*) as count 
+  	from project_info 
+  	group by status 
+  	order by status
+  </select>
+  
+  <select id="queryLatesProcess" resultMap="ProcessProgressVoResultMap">
+  	select 
+  	pp.process_name,pp.period,pi.project_name,pp.update_time 
+  	from project_process as pp join project_info as pi 
+  	on(pp.project_id=pi.id) 
+  	order by pp.update_time desc limit 10
+  </select>
+  
+  <select id="queryFinishTotalCount" resultType="java.lang.Integer">
+  	select count(id) 
+  	from project_info 
+  	where status=7
+  </select>
+  
+  <select id="queryProcessCount" resultType="java.lang.Integer">
+  	select count(id) 
+  	from project_process 
+  	where status=#{status} AND project_id=#{projectId}
+  </select>
+  
+  <select id="queryAllProcessCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select count(id) 
+  	from project_process 
+  	where project_id=#{projectId}
+  </select>
+  
+  <select id="queryUnfinishPorject" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select id,project_name 
+  	from project_info 
+  	where leader_id=#{id} and status in(1,2,3,4,5,6)
+  </select>
+  
+  <select id="getProcessDescription" parameterType="java.lang.String" resultType="com.infrastructure.portal.entity.po.config.ProcessConfig">
+  	select description 
+  	from process_config 
+  	where process_name like '%${processName}%'
+  </select>
+  
+  <select id="queryPeriodByPage" resultMap="WorkVoResultMap">
+  	select 
+  	pp.id, pp.project_id, pi.project_name, pi.project_num, pp.period, pp.period_name, pp.period_leader_id, pp.status, pp.period_start_date, pp.period_end_date, pp.create_time, pp.update_time 
+  	from project_period as pp join project_info as pi 
+  	on(pp.project_id=pi.id)
+  	<where>
+  		<if test="leaderId>0">
+			and pp.period_leader_id=#{leaderId}  		
+  		</if>
+  		<if test="qwv != null">
+	  		<if test="qwv.projectName != null">
+	  			and pi.project_name like '%${qwv.projectName}%'
+	  		</if>
+	  		<if test="qwv.projectNum != null">
+	  			and pi.project_num like '%${qwv.projectNum}%'
+	  		</if>
+	  		<if test="qwv.status != null">
+	  			and pp.status = #{qwv.status}
+	  		</if>
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="getPeriodById" parameterType="java.lang.Integer" resultMap="WorkVoResultMap">
+  	select 
+  	id, period, period_name, period_start_date, period_end_date, status 
+  	from project_period 
+  	where id=#{periodId}
+  </select>
+  
+  <delete id="deleteProjectProcessById" parameterType="java.lang.Integer">
+    delete from project_process
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteProjectProcessList">
+  	delete from project_process 
+  	where project_id=#{projectId} and period=#{period}
+  </delete>   
+  
+  <insert id="addProjectInfo" parameterType="com.infrastructure.portal.entity.po.project.ProjectInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into project_info (id, project_name, project_num, 
+      type_name, entry_staff_account, description, 
+      leader_id, company, status, 
+      project_start_date, project_end_date, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectNum,jdbcType=VARCHAR}, 
+      #{typeName,jdbcType=VARCHAR}, #{entryStaffAccount,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{leaderId,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{projectStartDate,jdbcType=DATE}, #{projectEndDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>  
+  
+  <insert id="addProjectPeriod" parameterType="com.infrastructure.portal.entity.po.project.ProjectPeriod" useGeneratedKeys="true" keyProperty="id">
+    insert into project_period (id, project_id, period, 
+      period_name, period_leader_id, period_start_date, 
+      period_end_date, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, 
+      #{periodName,jdbcType=VARCHAR}, #{periodLeaderId,jdbcType=INTEGER}, #{periodStartDate,jdbcType=DATE}, 
+      #{periodEndDate,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="addProjectType" parameterType="com.infrastructure.portal.entity.po.project.ProjectType">
+    insert into project_type (id, type_name, description, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="addProjectProcess" parameterType="com.infrastructure.portal.entity.po.project.ProjectProcess">
+    insert into project_process (id, project_id, process_name, 
+      description, period, serial_num, 
+      remark, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{processName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{period,jdbcType=INTEGER}, #{serialNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="modifyProjectInfo" parameterType="com.infrastructure.portal.entity.po.project.ProjectInfo">
+    update project_info
+    <set>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectNum != null">
+        project_num = #{projectNum,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryStaffAccount != null">
+        entry_staff_account = #{entryStaffAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderId != null">
+        leader_id = #{leaderId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="projectStartDate != null">
+        project_start_date = #{projectStartDate,jdbcType=DATE},
+      </if>
+      <if test="projectEndDate != null">
+        project_end_date = #{projectEndDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="modifyProjectProcess" parameterType="com.infrastructure.portal.entity.po.project.ProjectProcess">
+    update project_process
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="processName != null">
+        process_name = #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="serialNum != null">
+        serial_num = #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateProjectProcess">
+  	update project_process
+    <set>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = 1,
+      </if>
+    </set>
+    where id = #{processId,jdbcType=INTEGER}
+  </update>
+  	
+  <update id="updateProjectStatus">
+  	update 
+  	project_info 
+  	set status=#{period}
+  	where id=#{projectId}
+  </update>
+  
+  <update id="modifyProjectType" parameterType="com.infrastructure.portal.entity.po.project.ProjectType">
+    update project_type
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updatePeriodStatus" parameterType="java.lang.Integer">
+  	 update project_period
+    <set>     
+      <if test="record.status != null">
+        status = 1
+      </if>
+    </set>
+    where id=#{periodId}
+  </update>
+  
+  <update id="deleteUserById" parameterType="java.lang.Integer">
+  	update project_info 
+  	set status=0 
+  	where id=#{id}
+  </update>
+  
+  <update id="updatePeriodInfo" parameterType="com.infrastructure.portal.entity.po.project.ProjectPeriod">
+    update project_period
+    set project_id = #{projectId,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
+      period_name = #{periodName,jdbcType=VARCHAR},
+      period_leader_id = #{periodLeaderId,jdbcType=INTEGER},
+      period_start_date = #{periodStartDate,jdbcType=DATE},
+      period_end_date = #{periodEndDate,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="decorator" content="home" />
+<title>主页</title>
+</head>
+
+<body>
+
+	<div class="main-content-inner">
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+			<ul class="breadcrumb">
+				<li class="active"><i class="ace-icon fa fa-home home-icon"></i><a
+					href="#">主页</a></li>
+			</ul>
+			<!-- /.breadcrumb -->
+
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+			<!-- /section:settings.box -->
+			<div class="page-header">
+				<h1>
+					主页 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+						项目&信息概况
+					</small>
+				</h1>
+			</div>
+			<!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+					<div class="alert alert-block alert-success">
+						<button type="button" class="close" data-dismiss="alert">
+							<i class="ace-icon fa fa-times"></i>
+						</button>
+
+						<i class="ace-icon fa fa-check green"></i> 欢迎来到 <strong
+							class="green"> 基建项目管理系统 </strong>, 快速查看您的项目、信件详情，管理您的项目。
+					</div>
+
+					<div class="row">
+						<div class="space-6"></div>
+
+						<div class="col-sm-6 infobox-container">
+							<!-- #section:pages/dashboard.infobox -->
+							<div class="infobox infobox-green">
+								<div class="infobox-icon">
+									<i class="ace-icon fa fa-comments"></i>
+								</div>
+
+								<div class="infobox-data">
+									<span class="infobox-data-number">${projectTotalCount}</span>
+									<div class="infobox-content">项目</div>
+								</div>
+
+
+								<!-- /section:pages/dashboard.infobox.stat -->
+							</div>
+
+							<div class="infobox infobox-blue">
+								<div class="infobox-icon">
+									<i class="ace-icon fa fa-twitter"></i>
+								</div>
+
+								<div class="infobox-data">
+									<span class="infobox-data-number">${userTotalCount}</span>
+									<div class="infobox-content">用户</div>
+								</div>
+							</div>
+
+							<!-- /section:pages/dashboard.infobox -->
+							<div class="space-6"></div>
+
+							<!-- #section:pages/dashboard.infobox.dark -->
+							<div class="infobox infobox-green infobox-small infobox-dark">
+								<div class="infobox-progress">
+									<!-- #section:pages/dashboard.infobox.easypiechart -->
+									<div class="easy-pie-chart percentage" data-percent="${projectFinishPercent}"
+										data-size="39">
+										<span class="percent">${projectFinishPercent}</span>%
+									</div>
+
+									<!-- /section:pages/dashboard.infobox.easypiechart -->
+								</div>
+
+								<div class="infobox-data">
+									<div class="infobox-content">项目</div>
+									<div class="infobox-content">完成</div>
+								</div>
+							</div>
+
+							<div class="infobox infobox-blue infobox-small infobox-dark">
+								<!-- #section:pages/dashboard.infobox.sparkline -->
+								<div class="infobox-chart">
+									<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
+								</div>
+
+								<!-- /section:pages/dashboard.infobox.sparkline -->
+								<div class="infobox-data">
+									<div class="infobox-content">资金总额</div>
+									<div class="infobox-content">￥13,200</div>
+								</div>
+							</div>
+
+							<div class="infobox infobox-grey infobox-small infobox-dark">
+								<div class="infobox-icon">
+									<i class="ace-icon fa fa-download"></i>
+								</div>
+
+								<div class="infobox-data">
+									<div class="infobox-content">文件下载</div>
+									<div class="infobox-content">${documentDownloadCount}次</div>
+								</div>
+							</div>
+
+							<!-- /section:pages/dashboard.infobox.dark -->
+						</div>
+
+						<div class="vspace-12-sm"></div>
+
+						<div class="col-sm-5">
+							<div class="widget-box">
+								<div
+									class="widget-header widget-header-flat widget-header-small">
+									<h5 class="widget-title">
+										<i class="ace-icon fa fa-signal"></i> 项目阶段分布
+									</h5>
+								</div>
+
+								<div class="widget-body">
+									<div class="widget-main">
+										<!-- #section:plugins/charts.flotchart -->
+										<div id="piechart-placeholder"></div>
+
+										<!-- /section:plugins/charts.flotchart -->
+										<div class="hr hr8 hr-double"></div>
+
+										<div class="clearfix">
+											<!-- #section:custom/extra.grid -->
+											<div class="grid3">
+												<span class="grey"> <i
+													class="ace-icon glyphicon glyphicon-edit fa-2x blue"></i>
+													&nbsp; 立项
+												</span>
+												<h4 class="bigger pull-right" id="period1"></h4>
+											</div>
+
+											<div class="grid3">
+												<span class="grey"> <i
+													class="ace-icon fa fa-eye fa-2x purple"></i> 
+													&nbsp; 施工
+												</span>
+												<h4 class="bigger pull-right" id="period5"></h4>
+											</div>
+
+											<div class="grid3">
+												<span class="grey"> <i
+													class="ace-icon glyphicon glyphicon-ok fa-2x red"></i>
+													&nbsp; 完成
+												</span>
+												<h4 class="bigger pull-right" id="period7"></h4>
+											</div>
+
+											<!-- /section:custom/extra.grid -->
+										</div>
+									</div>
+									<!-- /.widget-main -->
+								</div>
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget-box -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+
+					<!-- #section:custom/extra.hr -->
+					<div class="hr hr32 hr-dotted"></div>
+
+					<!-- /section:custom/extra.hr -->
+					<div class="row">
+						<div class="col-sm-5">
+							<div class="widget-box transparent">
+								<div class="widget-header widget-header-flat">
+									<h4 class="widget-title lighter">
+										<i class="ace-icon fa fa-star orange"></i> 项目最新进展
+									</h4>
+
+									<div class="widget-toolbar">
+										<a href="#" data-action="collapse"> <i
+											class="ace-icon fa fa-chevron-up"></i>
+										</a>
+									</div>
+								</div>
+
+								<div class="widget-body">
+									<div class="widget-main no-padding">
+										<table class="table table-bordered table-striped">
+											<thead class="thin-border-bottom">
+												<tr>
+													<th><i class="ace-icon fa fa-caret-right blue"></i>项目名称
+													</th>
+
+													<th><i class="ace-icon fa fa-caret-right blue"></i>添加或完成流程
+													</th>
+
+													<th class="hidden-480"><i
+														class="ace-icon fa fa-caret-right blue"></i>最近更新时间</th>
+												</tr>
+											</thead>
+
+											<tbody>
+											<#list processList as project>
+												<tr>
+													<td>${project.projectName}</td>
+													<td class="hidden-480"><span
+														class="label label-info arrowed-right arrowed-in">[阶段${project.period}]${project.processName}</span>
+													</td>
+													<td>${project.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+												</tr>
+											</#list>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.widget-main -->
+								</div>
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget-box -->
+						</div>
+						<!-- /.col -->
+
+						<div class="col-sm-7">
+							<div class="widget-box">
+								<div class="widget-header">
+									<h4 class="widget-title lighter smaller">
+										<i class="ace-icon fa fa-comment blue"></i> 未读信息
+									</h4>
+								</div>
+
+								<div class="widget-body">
+									<div class="widget-main no-padding">
+										<!-- #section:pages/dashboard.conversations -->
+										<div class="dialogs">
+											<#list messageList as message>
+											<div class="itemdiv dialogdiv">
+												<div class="user">
+													<img alt="Jim's Avatar"
+														src="${ctx}/static/assets/avatars/avatar4.png" />
+												</div>
+
+												<div class="body">
+													<div class="time">
+														<i class="ace-icon fa fa-clock-o"></i> <span class="grey">${message.sendTime?string('yyyy-MM-dd HH:mm:ss')}</span>
+													</div>
+
+													<div class="name">
+														<a href="#">${message.senderAccount}</a>
+													</div>
+													<div class="text">${message.messageTitle}</div>
+
+													<div class="tools">
+														<a href="${ctx}/message/show_message_info?id=${message.id}" class="btn btn-minier btn-info"> <i
+															class="icon-only ace-icon fa fa-share"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+											</#list>
+										</div>
+
+										<!-- /section:pages/dashboard.conversations -->
+									</div>
+									<!-- /.widget-main -->
+								</div>
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget-box -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+
+					<!-- PAGE CONTENT ENDS -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.page-content -->
+	</div>
+	<!-- page specific plugin scripts -->
+	<script type="text/javascript">
+		jQuery(function($) {
+				$('.easy-pie-chart.percentage').each(function(){
+					var $box = $(this).closest('.infobox');
+					var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
+					var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
+					var size = parseInt($(this).data('size')) || 50;
+					$(this).easyPieChart({
+						barColor: barColor,
+						trackColor: trackColor,
+						scaleColor: false,
+						lineCap: 'butt',
+						lineWidth: parseInt(size/10),
+						animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
+						size: size
+					});
+				});
+			
+				$('.sparkline').each(function(){
+					var $box = $(this).closest('.infobox');
+					var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
+					$(this).sparkline('html',
+									 {
+										tagValuesAttribute:'data-values',
+										type: 'bar',
+										barColor: barColor ,
+										chartRangeMin:$(this).data('min') || 0
+									 });
+				});
+			
+			
+			  //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
+			  //but sometimes it brings up errors with normal resize event handlers
+			  $.resize.throttleWindow = false;
+			  
+			  
+			  var count1=0;
+			  var count2=0;
+			  var count3=0;
+		      var count4=0;
+			  var count5=0;
+			  var count6=0;
+			  var count7=0;
+			  var totalCount=0;
+			  var data = [];
+			  $.ajax({
+		             type: "GET",
+		             url: "${ctx}/project_count",
+		             data: "",
+		             dataType: "json",
+		             success: function(data){
+				            	if (typeof(data.data.countOf1) != "undefined") { 
+				            		count1=data.data.countOf1;
+				            	}
+				            	if (typeof(data.data.countOf2) != "undefined") { 
+				            		count2=data.data.countOf2;
+				            	}
+				            	if (typeof(data.data.countOf3) != "undefined") { 
+				            		count3=data.data.countOf3;
+				            	}
+				            	if (typeof(data.data.countOf4) != "undefined") { 
+				            		count4=data.data.countOf4;
+				            	}
+				            	if (typeof(data.data.countOf5) != "undefined") { 
+				            		count5=data.data.countOf5;
+				            	}
+				            	if (typeof(data.data.countOf6) != "undefined") { 
+				            		count6=data.data.countOf6;
+				            	}
+				            	if (typeof(data.data.countOf7) != "undefined") { 
+				            		count7=data.data.countOf7;
+				            	}
+				 			    totalCount=data.data.totalCount;
+				 			    //alert("count1="+count1+";count2="+count2+";count3="+count3+";count4="+count4+";count5="+count5+";count6="+count6+";count7="+count7+";totalCount="+totalCount);
+				 			    data = [
+				 						{ label: "立项",  data: count1*100.0/totalCount, color: "#2091CF"},
+				 						{ label: "设计",  data: count2*100.0/totalCount, color: "#68BC31"},
+				 						{ label: "预算清单",  data: count3*100.0/totalCount, color: "#FEE074"},
+				 						{ label: "招标",  data: count4*100.0/totalCount, color: "#CCFF66"},
+				 						{ label: "施工监管",  data: count5*100.0/totalCount, color: "#AF4E96"},
+				 						{ label: "结算",  data: count6*100.0/totalCount, color: "#CCCCFF"},
+				 						{ label: "完成",  data: count7*100.0/totalCount, color: "#DA5430"}
+				 			    ];
+				 			    $("#period1").html(count1);
+				 			    $("#period5").html(count5);
+				 			    $("#period7").html(count7);
+				 			    drawPieChart(placeholder, data);
+		             }
+		         });
+			  
+			  var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'180px'});
+			  
+			  function drawPieChart(placeholder, data, position) {
+			 	  $.plot(placeholder, data, {
+					series: {
+						pie: {
+							show: true,
+							tilt:0.8,
+							highlight: {
+								opacity: 0.25
+							},
+							stroke: {
+								color: '#fff',
+								width: 2
+							},
+							startAngle: 2
+						}
+					},
+					legend: {
+						show: true,
+						position: position || "ne", 
+						labelBoxBorderColor: null,
+						margin:[-30,15]
+					}
+					,
+					grid: {
+						hoverable: true,
+						clickable: true
+					}
+				 })
+			 }
+			 //drawPieChart(placeholder, data);
+			
+			 /**
+			 we saved the drawing function and the data to redraw with different position later when switching to RTL mode dynamically
+			 so that's not needed actually.
+			 */
+			 placeholder.data('chart', data);
+			 placeholder.data('draw', drawPieChart);
+			
+			
+			  //pie chart tooltip example
+			  var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
+			  var previousPoint = null;
+			
+			  placeholder.on('plothover', function (event, pos, item) {
+				if(item) {
+					if (previousPoint != item.seriesIndex) {
+						previousPoint = item.seriesIndex;
+						var tip = item.series['label'] + " : " + item.series['percent']+'%';
+						$tooltip.show().children(0).text(tip);
+					}
+					$tooltip.css({top:pos.pageY + 10, left:pos.pageX + 10});
+				} else {
+					$tooltip.hide();
+					previousPoint = null;
+				}
+				
+			 });
+			
+				/////////////////////////////////////
+				$(document).one('ajaxloadstart.page', function(e) {
+					$tooltip.remove();
+				});
+			
+			
+			
+				$('.dialogs,.comments').ace_scroll({
+					size: 300
+			    });
+				
+				
+				//Android's default browser somehow is confused when tapping on label which will lead to dragging the task
+				//so disable dragging when clicking on label
+				var agent = navigator.userAgent.toLowerCase();
+				if("ontouchstart" in document && /applewebkit/.test(agent) && /android/.test(agent))
+				  $('#tasks').on('touchstart', function(e){
+					var li = $(e.target).closest('#tasks li');
+					if(li.length == 0)return;
+					var label = li.find('label.inline').get(0);
+					if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
+				});
+			
+				$('#tasks').sortable({
+					opacity:0.8,
+					revert:true,
+					forceHelperSize:true,
+					placeholder: 'draggable-placeholder',
+					forcePlaceholderSize:true,
+					tolerance:'pointer',
+					stop: function( event, ui ) {
+						//just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
+						$(ui.item).css('z-index', 'auto');
+					}
+					}
+				);
+				$('#tasks').disableSelection();
+				$('#tasks input:checkbox').removeAttr('checked').on('click', function(){
+					if(this.checked) $(this).closest('li').addClass('selected');
+					else $(this).closest('li').removeClass('selected');
+				});
+			
+			
+				//show the dropdowns on top or bottom depending on window height and menu position
+				$('#task-tab .dropdown-hover').on('mouseenter', function(e) {
+					var offset = $(this).offset();
+			
+					var $w = $(window)
+					if (offset.top > $w.scrollTop() + $w.innerHeight() - 100) 
+						$(this).addClass('dropup');
+					else $(this).removeClass('dropup');
+				});
+			
+			})
+	</script>
+
+</body>
+</html>

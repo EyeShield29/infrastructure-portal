@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.user.PortalUserMapper">
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.portal.PortalUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="user_portrait" jdbcType="VARCHAR" property="userPortrait" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="RoleResultMap" type="com.infrastructure.portal.entity.po.portal.PortalRole">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <resultMap id="FunctionResultMap" type="com.infrastructure.portal.entity.po.portal.PortalFunction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="function_name" jdbcType="VARCHAR" property="functionName" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, account, passwd, user_name, sex, phone_num, email, user_portrait, last_login_time, 
+    create_time, update_time
+  </sql>
+  
+  <sql id="query_potaluser_where">
+  	<where>
+	  	<if test="userName != null">
+	  		and user_name like '%${userName}%'
+	  	</if>
+	  	<if test="account != null">
+	  		and account like '%${account}%'
+	  	</if>
+	  	<if test="roleId != null">
+	  		and role_id = #{roleId}
+	  	</if>
+  	</where>
+  </sql>
+  
+  <select id="queryUserInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPage" parameterType="com.infrastructure.portal.entity.vo.QueryUserVo" resultMap="BaseResultMap">
+  	select 
+    pu.*
+    from portal_user as pu join portal_user_role as pur on pur.user_id=pu.id
+  	<include refid="query_potaluser_where" />
+  </select>
+  
+  <select id="queryUserVoListAll" resultType="com.infrastructure.portal.entity.vo.ListUserVo">
+  	select 
+  	id,account,user_name 
+  	from portal_user 
+  	order by account, user_name
+  </select>
+  
+  <select id="listPortalUserRoles" parameterType="java.lang.Integer" resultMap="RoleResultMap">
+  	select 
+  	pr.*
+  	from portal_role as pr join portal_user_role as pur 
+  	on pr.id=pur.role_id and pur.user_id=#{id}
+  </select>
+  
+  <select id="getUserByNameAndPd" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" /> 
+ 	from portal_user 
+ 	where id=#{id} and passwd=#{passwd}  
+  </select>
+  
+  <select id="userTotalCount" resultType="java.lang.Integer">
+  	select count(*)
+  	from portal_user
+  </select>
+  
+  <select id="getUserByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from portal_user 
+  	where account=#{userName}
+  </select>
+  
+  <select id="listPortalUserFunctions" parameterType="java.lang.Integer" resultMap="FunctionResultMap">
+  	select pf.* 
+  	from portal_function as pf JOIN portal_role_function as prf 
+  	on pf.id=prf.function_id
+    join portal_user_role as pur 
+    on prf.role_id=pur.role_id and pur.user_id=#{id}
+  </select>
+  
+  <delete id="deleteUserById" parameterType="java.lang.Integer">
+    delete portal_user,portal_user_role 
+    from portal_user left join portal_user_role
+    on portal_user.id=portal_user_role.user_id 
+    where portal_user.id= #{id}
+  </delete>
+  
+  <insert id="addPortalUserRole" parameterType="com.infrastructure.portal.entity.po.portal.PortalUserRole">
+  	insert into portal_user_role ( user_id,role_id,create_time ) 
+  	values (#{userId}, #{roleId}, #{createTime})
+  </insert>
+  
+  <insert id="insert" parameterType="com.infrastructure.portal.entity.po.portal.PortalUser">
+    insert into portal_user (id, account, passwd, 
+      user_name, sex, phone_num, 
+      email, user_portrait, last_login_time, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{userPortrait,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="addPortalUser" parameterType="com.infrastructure.portal.entity.po.portal.PortalUser">
+    insert into portal_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="passwd != null">
+        passwd,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="userPortrait != null">
+        user_portrait,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortrait != null">
+        #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="modifyPortalUserRole" parameterType="com.infrastructure.portal.entity.po.portal.PortalUserRole">
+  	UPDATE portal_user_role 
+  	set role_id=#{roleId} 
+  	where user_id=#{userId}
+  </update>
+  
+  <update id="modifyPortalUser" parameterType="com.infrastructure.portal.entity.po.portal.PortalUser">
+    update portal_user
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortrait != null">
+        user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.infrastructure.portal.entity.po.portal.PortalUser">
+    update portal_user
+    set account = #{account,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

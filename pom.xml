@@ -1,0 +1,298 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.infrastructure</groupId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<spring.version>4.3.1.RELEASE</spring.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<aspectj.version>1.8.3</aspectj.version>
+		<jackson.version>2.4.3</jackson.version>
+		<sitemesh.version>2.4.2</sitemesh.version>
+		<freemarker.version>2.3.23</freemarker.version>
+		<shiro.version>1.2.4</shiro.version>
+		<ehcache.version>2.6.11</ehcache.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+    		<groupId>com.github.pagehelper</groupId>
+    		<artifactId>pagehelper</artifactId>
+    		<version>5.1.2</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.hamcrest</groupId>
+    		<artifactId>hamcrest-all</artifactId>
+   			 <version>1.3</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>log4j</groupId>
+    		<artifactId>log4j</artifactId>
+    		<version>1.2.17</version>
+		</dependency>		
+		<dependency>
+    		<groupId>org.mybatis</groupId>
+    		<artifactId>mybatis</artifactId>
+    		<version>3.4.1</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.mybatis</groupId>
+    		<artifactId>mybatis-spring</artifactId>
+    		<version>1.3.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.mchange</groupId>
+    		<artifactId>c3p0</artifactId>
+    		<version>0.9.5.2</version>
+		</dependency>
+		<dependency>
+    		<groupId>javax.servlet.jsp</groupId>
+   			<artifactId>javax.servlet.jsp-api</artifactId>
+    		<version>2.3.1</version>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>  
+            <groupId>commons-fileupload</groupId>  
+            <artifactId>commons-fileupload</artifactId>  
+            <version>1.3.1</version>  
+		</dependency>
+  		<dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<version>5.1.6</version>
+		</dependency>
+  		<dependency>
+    		<groupId>ch.qos.logback</groupId>
+    		<artifactId>logback-classic</artifactId>
+    		<version>1.2.3</version>
+    		<scope>test</scope>
+		</dependency>
+  		<dependency>
+    		<groupId>commons-codec</groupId>
+    		<artifactId>commons-codec</artifactId>
+    		<version>1.10</version>
+		</dependency>
+  		<dependency>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.8.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>commons-io</groupId>
+    		<artifactId>commons-io</artifactId>
+    		<version>2.4</version>
+		</dependency>
+  		<dependency>
+    		<groupId>org.apache.commons</groupId>
+    		<artifactId>commons-lang3</artifactId>
+   			 <version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
+		<dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-core</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-web</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-oxm</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-tx</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-jdbc</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-webmvc</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-context</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-context-support</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-aop</artifactId>  
+      <version>${spring.version}</version>  
+    </dependency>  
+  
+    <dependency>  
+      <groupId>org.springframework</groupId>  
+      <artifactId>spring-test</artifactId>  
+      <version>4.1.0.RELEASE</version>  
+    </dependency>  
+  
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<!-- srping end -->
+
+		<!-- j2ee libraries begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- spring mvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>${sitemesh.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<type>jar</type>
+		</dependency>
+		<!-- j2ee libraries end -->
+		
+		<!-- SECURITY begin -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<!-- SECURITY end -->
+
+
+		<!-- test begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- test end -->
+  </dependencies>
+  <build>
+    <finalName>cxl</finalName>
+    <plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<!-- <goals>
+							<goal>copy-dependencies</goal>
+						</goals> -->
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<!-- 是否不包含间接依赖的包 -->
+							<excludeTransitive>false</excludeTransitive>
+							<!-- 复制的jar文件是否去掉版本信息 -->
+							<stripVersion>false</stripVersion>
+							<!-- 排除provided的依赖 如：basiccommon -->
+							<excludeScope>provided</excludeScope>
+							<!-- 排除junit -->
+							<excludeArtifactIds>junit</excludeArtifactIds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- 跳过单元测试 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+  </build>
+	<artifactId>infrastructure-portal</artifactId>
+</project>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.portal.PortalRoleFunctionMapper">
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.portal.PortalRoleFunction">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="function_id" jdbcType="INTEGER" property="functionId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    role_id, function_id
+  </sql>
+    
+  <select id="selectByPrimaryKey" parameterType="com.infrastructure.portal.entity.po.portal.PortalRoleFunction" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_role_function
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and function_id = #{functionId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from portal_role_function
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.infrastructure.portal.entity.po.portal.PortalRoleFunction">
+    insert into portal_role_function (role_id, function_id, create_time, 
+      update_time)
+    values (#{roleId,jdbcType=INTEGER}, #{functionId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.infrastructure.portal.entity.po.portal.PortalRoleFunction">
+    insert into portal_role_function
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="functionId != null">
+        function_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="functionId != null">
+        #{functionId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.infrastructure.portal.entity.po.portal.PortalRoleFunction">
+    update portal_role_function
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and function_id = #{functionId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.infrastructure.portal.entity.po.portal.PortalRoleFunction">
+    update portal_role_function
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and function_id = #{functionId,jdbcType=INTEGER}
+  </update>
+</mapper>

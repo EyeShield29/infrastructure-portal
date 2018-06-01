@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.portal.PortalFunctionMapper">
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.portal.PortalFunction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="function_name" jdbcType="VARCHAR" property="functionName" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, function_name, permission, create_time, update_time
+  </sql>
+  
+  <sql id="query_portalfunction_where">
+  	<where>
+  		<if test="functionName != null">
+  			and function_name like '%${functionName}%'
+  		</if> 
+  		<if test="permission != null">
+  			and permission like '%${permission}%'
+  		</if>
+  	</where>
+  </sql>   
+  
+  <select id="selectByPage" parameterType="com.infrastructure.portal.entity.po.portal.PortalFunction" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from portal_function
+    <include refid="query_portalfunction_where" />
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_function
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getFunctionList" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from portal_function
+  </select>
+  
+  <select id="listPortalRoleFunctions" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	pf.id,pf.function_name 
+  	from portal_function AS pf join portal_role_function AS prf ON(pf.id=prf.function_id) 
+  	where prf.role_id= #{roleId}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from portal_function
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.infrastructure.portal.entity.po.portal.PortalFunction">
+    insert into portal_function (id, function_name, permission, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{functionName,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.infrastructure.portal.entity.po.portal.PortalFunction">
+    insert into portal_function
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="functionName != null">
+        function_name,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="functionName != null">
+        #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.infrastructure.portal.entity.po.portal.PortalFunction">
+    update portal_function
+    <set>
+      <if test="functionName != null">
+        function_name = #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.infrastructure.portal.entity.po.portal.PortalFunction">
+    update portal_function
+    set function_name = #{functionName,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

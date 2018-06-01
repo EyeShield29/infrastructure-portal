@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>信件详情</title>
+<meta name="decorator" content="form" />
+
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li><a href="#">站内信</a></li>
+			<li class="active">信件详情</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				站内信 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+					信件详情
+				</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row" style="margin:0 15%">
+			<#list relatedMessageList as messageInfo>
+				<#if messageInfo.senderAccount==ownAccount>
+					<#if messageInfo.id==originalId>
+					<div class="col-sm-12" style="background:#ffffcc;text-align:right;border:1px solid #ccc; border-width:2px 0;">
+						<div><span style="color:red">※列表中点击的信件</span></div>
+					<#else>
+					<div class="col-sm-12" style="text-align:right;border:1px solid #ccc; border-width:2px 0;">
+					</#if>
+						<!-- PAGE CONTENT BEGINS -->
+						<h4 class="green smaller lighter">${messageInfo.messageTitle}</h4>
+													<h3>${messageInfo.content}</h3>
+													<div>${messageInfo.senderAccount}&nbsp;&nbsp;${messageInfo.sendTime}</div>
+					</div>
+				<#else>
+					<#if messageInfo.id==originalId>
+					<div class="col-sm-12" style="background:#ffffcc;text-align:left;border:1px solid #ccc; border-width:2px 0;">
+						<div><span style="color:red">※列表中点击的信件</span></div>
+					<#else>
+					<div class="col-sm-12" style="text-align:left;border:1px solid #ccc; border-width:2px 0;">
+					</#if>
+						<!-- PAGE CONTENT BEGINS -->
+						<h4 class="blue smaller lighter">${messageInfo.messageTitle}</h4>
+													<h3>${messageInfo.content}</h3>
+													<div>${messageInfo.senderAccount}&nbsp;&nbsp;${messageInfo.sendTime}</div>
+					</div>
+				</#if>
+				
+			</#list>	
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+
+	<script type="text/javascript">
+		$(function() {
+				$("#add_portal_user-form").validate();
+				$("#add_portal_user-form").bind(
+						'submit',
+						function() {
+							//校验表单
+							if (!$(this).valid()) {
+								return false;
+							}
+							ajaxSubmit(this, function(response) {
+								response = $.parseJSON(response);
+								if (response.status == 1) {
+									alert("添加成功！");
+									//window.open("${ctx}/portal_user/show_user_list");
+									window.location.reload();
+								} else {
+									alert(response.errormsg);
+								}
+							});
+							return false;
+						});
+		});
+	</script>
+</body>
+</html>

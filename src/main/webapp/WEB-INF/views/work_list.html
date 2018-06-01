@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>我的工作</title>
+<meta name="decorator" content="list" />
+
+</head>
+
+<body>
+		<!-- #section:basics/content.breadcrumbs -->
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+			<ul class="breadcrumb">
+				<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">首页</a>
+				</li>
+
+				<li><a href="#">项目管理</a></li>
+				<li class="active">我的工作</li>
+			</ul>
+			<!-- /.breadcrumb -->
+		</div>
+
+		<!-- /section:basics/content.breadcrumbs -->
+		<div class="page-content">
+			<!-- /section:settings.box -->
+			<div class="page-header">
+				<h1>
+					项目管理 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+						我的工作
+					</small>
+				</h1>
+			</div>
+			<!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+
+					<form class="form-inline" action="${ctx}/work/search"
+						method="post">
+						<div class="row">
+							<div class="col-xs-12 col-sm-8">
+								<div class="input-group">
+									项目名称：<input name="projectName" value="${queryWorkVo.projectName}"
+										type="text" class="input-small" />  
+									项目编号：<input name="projectNum" value="${queryWorkVo.projectNum}"
+										type="text" class="input-small" />  
+									<button type="submit" class="btn btn-purple btn-sm">
+										查询 <i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+
+
+					<!-- <div class="table-responsive"> -->
+
+					<!-- <div class="dataTables_borderWrap"> -->
+					<div>
+						<table id="sample-table-1"
+							class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>项目编号</th>
+									<th>项目名称</th>
+									<th>负责阶段</th>
+									<th>阶段状态</th>
+									<th>阶段起止时间</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<#list workList as work>
+								<tr>
+									<!-- <td class="center"><label> <input type="checkbox"
+														class="ace" /> <span class="lbl"></span>
+												</label></td> -->
+									<td>${work.projectNum}</td>
+									<td>${work.projectName}</td>
+									<td>${work.periodName}</td>
+									<td><#if work.status=1>已完成
+										<#elseif work.status=0>未完成
+										</#if>
+									</td>
+									<td>${work.periodStartDate?string("yyyy-MM-dd")}到${work.periodEndDate?string("yyyy-MM-dd")}</td>
+									<td>
+										<div class="hidden-sm hidden-xs action-buttons">
+											<#if work.period=0>
+											<a class="blue" href="${ctx}/project/view_project?projectId=${work.projectId}"> 
+												<i class="ace-icon fa fa-search-plus bigger-130"></i>
+											</a>
+											<#else>
+											<a class="blue" href="${ctx}/work/view_work?periodId=${work.id}&period=${work.period}&projectId=${work.projectId}"> 
+												<i class="ace-icon fa fa-search-plus bigger-130"></i>
+											</a>
+											</#if>
+										</div>
+									</td>
+								</tr>
+								</#list>
+							</tbody>
+						</table>
+					</div>
+					<#include "/common/common_page.html">
+				</div>
+			</div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+		<!-- /.page-content -->
+	
+	<script type="text/javascript">
+	</script>
+</body>
+</html>

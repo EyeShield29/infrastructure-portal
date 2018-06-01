@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>新增用户</title>
+<meta name="decorator" content="form" />
+</head>
+
+<body>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+		<ul class="breadcrumb">
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
+			</li>
+
+			<li><a href="#">用户管理</a></li>
+			<li class="active">新增用户</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+
+		<!-- /section:settings.box -->
+		<div class="page-header">
+			<h1>
+				用户管理 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增用户
+				</small>
+			</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<form class="form-horizontal" action="${ctx}/portal_user/addPortalUser"
+						id="add_portal_user-form" method="post">
+					<!-- #section:elements.form -->
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="account"> 账号 </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="account" name="account" placeholder="请输入账号…"
+								class="col-xs-10 col-sm-5" required/>
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="userName"> 姓名 </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="userName" name="userName" placeholder="请输入姓名…"
+								class="col-xs-10 col-sm-5" required/>
+						</div>
+					</div>
+
+					<!-- /section:elements.form -->
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="role"> 角色 </label>
+
+						<div class="col-sm-9">
+							<select name="role" class="col-xs-10 col-sm-5" required>
+									<option value="">请选择角色</option>
+									<#list roleList as role>
+									<option value="${role.id}">${role.roleName}[${role.roleCode}]</option>
+									</#list>
+							</select>
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="sex"> 性别 </label>
+
+						<div class="col-sm-9">
+							<select name="sex" class="col-xs-10 col-sm-5" required>
+									<option value="">请选择性别</option>
+									<option value="1">男</option>
+									<option value="0">女</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="phoneNum"> 手机号码 </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="phoneNum" name="phoneNum" placeholder="请输入手机号码…"
+								class="col-xs-10 col-sm-5"/>
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="email"> 邮箱 </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="email" name="email" placeholder="请输入邮箱…"
+								class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+
+					<!-- /section:elements.form -->
+					<div class="space-4"></div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="passwd"> 密码 </label>
+
+						<div class="col-sm-9">
+							<input type="password" id="passwd" name="passwd" placeholder="请输入您的密码"
+								class="col-xs-10 col-sm-5" required/> 
+						</div>
+					</div>
+
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"
+							for="rePasswd"> 重复密码 </label>
+
+						<div class="col-sm-9">
+							<input type="password" id="rePasswd" name="rePasswd" placeholder="再次输入密码进行确认"
+								class="col-xs-10 col-sm-5" required/> 
+						</div>
+					</div>
+
+					<div class="space-4"></div>
+
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn btn-info">
+								<i class="ace-icon fa fa-check bigger-110"></i> 提交
+							</button>
+
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+							</button> 
+						</div>
+					</div>
+					</form>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+
+	<script type="text/javascript">
+		$(function() {
+				$("#add_portal_user-form").validate();
+				$("#add_portal_user-form").bind(
+						'submit',
+						function() {
+							//校验表单
+							if (!$(this).valid()) {
+								return false;
+							}
+							ajaxSubmit(this, function(response) {
+								response = $.parseJSON(response);
+								if (response.status == 1) {
+									alert("添加成功！");
+									//window.open("${ctx}/portal_user/show_user_list");
+									window.location.reload();
+								} else {
+									alert(response.errormsg);
+								}
+							});
+							return false;
+						});
+		});
+	</script>
+</body>
+</html>

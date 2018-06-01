@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infrastructure.portal.mapper.message.MessageInfoMapper">
+  <resultMap id="BaseResultMap" type="com.infrastructure.portal.entity.po.message.MessageInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="trans_id" jdbcType="VARCHAR" property="transId" />
+    <result column="sender_account" jdbcType="VARCHAR" property="senderAccount" />
+    <result column="sender_visible" jdbcType="INTEGER" property="senderVisible" />
+    <result column="message_title" jdbcType="VARCHAR" property="messageTitle" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="reply_message_id" jdbcType="INTEGER" property="replyMessageId" />
+    <result column="receiver_account" jdbcType="VARCHAR" property="receiverAccount" />
+    <result column="receiver_visible" jdbcType="INTEGER" property="receiverVisible" />
+    <result column="is_readed" jdbcType="INTEGER" property="isReaded" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.infrastructure.portal.entity.po.message.MessageInfo">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, trans_id, sender_account, sender_visible, message_title, send_time, reply_message_id, 
+    receiver_account, receiver_visible, is_readed
+  </sql>
+  
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  
+  <sql id="query_Message_where">
+  	<where>
+	  	<if test="receiverAccount != null">
+	  		and receiver_account like '%${receiverAccount}%'
+	  		and receiver_visible = 1
+	  	</if>
+	  	<if test="senderAccount != null">
+	  		and sender_account like '%${senderAccount}%'
+	  		and sender_visible = 1
+	  	</if>
+	  	<if test="messageTitle != null">
+	  		and message_title like '%${messageTitle}%'
+	  	</if>
+	  	<if test="isReaded != null">
+	  		and is_readed = #{isReaded}
+	  	</if>
+  	</where>
+  	order by send_time desc
+  </sql>
+  
+  <sql id="query_Unread_where">
+  	<where>
+	  	<if test="receiverAccount != null">
+	  		and receiver_account like '%${receiverAccount}%'
+	  	</if>
+	  	<if test="isReaded != null">
+	  		and is_readed = #{isReaded}
+	  	</if>
+  	</where>
+  	order by send_time desc
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPage" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_info
+    <include refid="query_Message_where" />
+  </select>
+  
+  <select id="queryAllUnreadMessageInfo" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_info
+    <include refid="query_Unread_where" />
+  </select>
+  
+  <select id="queryRelatedMessageList" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_info
+    <where>
+    	<if test="transId != null">
+    		and trans_id = #{transId}
+    	</if>
+    </where>
+    order by send_time desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from message_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo">
+    insert into message_info (id, trans_id, sender_account, 
+      sender_visible, message_title, send_time, 
+      reply_message_id, receiver_account, receiver_visible, 
+      is_readed, create_time, update_time, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{transId,jdbcType=VARCHAR}, #{senderAccount,jdbcType=VARCHAR}, 
+      #{senderVisible,jdbcType=INTEGER}, #{messageTitle,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, 
+      #{replyMessageId,jdbcType=INTEGER}, #{receiverAccount,jdbcType=VARCHAR}, #{receiverVisible,jdbcType=INTEGER}, 
+      #{isReaded,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo">
+    insert into message_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="transId != null">
+        trans_id,
+      </if>
+      <if test="senderAccount != null">
+        sender_account,
+      </if>
+      <if test="senderVisible != null">
+        sender_visible,
+      </if>
+      <if test="messageTitle != null">
+        message_title,
+      </if>
+      <if test="sendTime != null">
+        send_time,
+      </if>
+      <if test="replyMessageId != null">
+        reply_message_id,
+      </if>
+      <if test="receiverAccount != null">
+        receiver_account,
+      </if>
+      <if test="receiverVisible != null">
+        receiver_visible,
+      </if>
+      <if test="isReaded != null">
+        is_readed,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="transId != null">
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="senderAccount != null">
+        #{senderAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="senderVisible != null">
+        #{senderVisible,jdbcType=INTEGER},
+      </if>
+      <if test="messageTitle != null">
+        #{messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null">
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyMessageId != null">
+        #{replyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverAccount != null">
+        #{receiverAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverVisible != null">
+        #{receiverVisible,jdbcType=INTEGER},
+      </if>
+      <if test="isReaded != null">
+        #{isReaded,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo">
+    update message_info
+    <set>
+      <if test="transId != null">
+        trans_id = #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="senderAccount != null">
+        sender_account = #{senderAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="senderVisible != null">
+        sender_visible = #{senderVisible,jdbcType=INTEGER},
+      </if>
+      <if test="messageTitle != null">
+        message_title = #{messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null">
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyMessageId != null">
+        reply_message_id = #{replyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverAccount != null">
+        receiver_account = #{receiverAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverVisible != null">
+        receiver_visible = #{receiverVisible,jdbcType=INTEGER},
+      </if>
+      <if test="isReaded != null">
+        is_readed = #{isReaded,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo">
+    update message_info
+    set trans_id = #{transId,jdbcType=VARCHAR},
+      sender_account = #{senderAccount,jdbcType=VARCHAR},
+      sender_visible = #{senderVisible,jdbcType=INTEGER},
+      message_title = #{messageTitle,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      reply_message_id = #{replyMessageId,jdbcType=INTEGER},
+      receiver_account = #{receiverAccount,jdbcType=VARCHAR},
+      receiver_visible = #{receiverVisible,jdbcType=INTEGER},
+      is_readed = #{isReaded,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.infrastructure.portal.entity.po.message.MessageInfo">
+    update message_info
+    set trans_id = #{transId,jdbcType=VARCHAR},
+      sender_account = #{senderAccount,jdbcType=VARCHAR},
+      sender_visible = #{senderVisible,jdbcType=INTEGER},
+      message_title = #{messageTitle,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      reply_message_id = #{replyMessageId,jdbcType=INTEGER},
+      receiver_account = #{receiverAccount,jdbcType=VARCHAR},
+      receiver_visible = #{receiverVisible,jdbcType=INTEGER},
+      is_readed = #{isReaded,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="deleteMessageInfoById" parameterType="java.lang.Integer">
+  	update message_info 
+  	set
+  	<if test="type == 1">
+  		sender_visible=0
+  	</if>
+  	<if test="type == 0">
+  		receiver_visible=0
+  	</if>
+  	where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
