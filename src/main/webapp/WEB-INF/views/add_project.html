@@ -184,7 +184,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="project_start_date" type="text" name="project_start_date"/>
+														<input class="datepicker" id="projectStartDate" type="text" name="projectStartDate"/>
 													</div>
 												</div>
 											</div>
@@ -198,7 +198,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="project_end_date" type="text" name="project_end_date"/>
+														<input class="datepicker" id="projectEndDate" type="text" name="projectEndDate"/>
 													</div>
 												</div>
 											</div>
@@ -259,7 +259,7 @@
 													<div>
 														<label> <input name="period2[]" value="${process2.processName}"
 															type="checkbox" class="ace" /> <span class="lbl">
-																${process2.processName}</span>
+																${process2.processName}[${process2.description}]</span>
 														</label>
 													</div>
 													</#list>
@@ -412,7 +412,7 @@
 											</div>
 
 											<div class="hr hr-dotted"></div>
-											<input type="hidden" name="periods[1].project_id"
+											<input type="hidden" name="periods[1].projectId"
 															class="col-xs-12 col-sm-5 projectID2" />
 											<input type="hidden" id="period" name="periods[1].period" value="2"
 															class="col-xs-12 col-sm-5" />
@@ -443,7 +443,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodStartDate2" type="text" name="periods[1].period_start_date"/>
+														<input class="datepicker" id="periodStartDate2" type="text" name="periods[1].periodStartDate"/>
 													</div>
 												</div>
 											</div>
@@ -457,13 +457,13 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodEndDate2" type="text" name="periods[1].period_end_date"/>
+														<input class="datepicker" id="periodEndDate2" type="text" name="periods[1].periodEndDate"/>
 													</div>
 												</div>
 											</div>
 
 											<div class="hr hr-dotted"></div>
-											<input type="hidden" name="periods[2].project_id"
+											<input type="hidden" name="periods[2].projectId"
 															class="col-xs-12 col-sm-5 projectID2" />
 											<input type="hidden" id="period" name="periods[2].period" value="3"
 															class="col-xs-12 col-sm-5" />
@@ -474,7 +474,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<select id="periodLeaderId3" name="periods[2].period_leader_id" class="select2"
+														<select id="periodLeaderId3" name="periods[2].periodLeaderId" class="select2"
 														data-placeholder="Click to Choose...">
 															<option value="">&nbsp;</option>
 															<#list userList as user>
@@ -494,7 +494,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodStartDate3" type="text" name="periods[2].period_start_date"/>
+														<input class="datepicker" id="periodStartDate3" type="text" name="periods[2].periodStartDate"/>
 													</div>
 												</div>
 											</div>
@@ -508,13 +508,13 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodEndDate3" type="text" name="periods[2].period_end_date"/>
+														<input class="datepicker" id="periodEndDate3" type="text" name="periods[2].periodEndDate"/>
 													</div>
 												</div>
 											</div>
 
 											<div class="hr hr-dotted"></div>
-											<input type="hidden" name="periods[3].project_id"
+											<input type="hidden" name="periods[3].projectId"
 															class="col-xs-12 col-sm-5 projectID2" />
 											<input type="hidden" id="period" name="periods[3].period" value="4"
 															class="col-xs-12 col-sm-5" />
@@ -525,7 +525,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<select id="periodLeaderId4" name="periods[3].period_leader_id" class="select2"
+														<select id="periodLeaderId4" name="periods[3].periodLeaderId" class="select2"
 														data-placeholder="Click to Choose...">
 															<option value="">&nbsp;</option>
 															<#list userList as user>
@@ -545,7 +545,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodStartDate4" type="text" name="periods[3].period_start_date"/>
+														<input class="datepicker" id="periodStartDate4" type="text" name="periods[3].periodStartDate"/>
 													</div>
 												</div>
 											</div>
@@ -559,13 +559,13 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodEndDate4" type="text" name="periods[3].period_end_date"/>
+														<input class="datepicker" id="periodEndDate4" type="text" name="periods[3].periodEndDate"/>
 													</div>
 												</div>
 											</div>
 
 											<div class="hr hr-dotted"></div>
-											<input type="hidden" name="periods[4].project_id"
+											<input type="hidden" name="periods[4].projectId"
 															class="col-xs-12 col-sm-5 projectID2" />
 											<input type="hidden" id="period" name="periods[4].period" value="5"
 															class="col-xs-12 col-sm-5" />
@@ -576,7 +576,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<select id="periodLeaderId5" name="periods[4].period_leader_id" class="select2"
+														<select id="periodLeaderId5" name="periods[4].periodLeaderId" class="select2"
 														data-placeholder="Click to Choose...">
 															<option value="">&nbsp;</option>
 															<#list userList as user>
@@ -596,7 +596,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodStartDate5" type="text" name="periods[4].period_start_date"/>
+														<input class="datepicker" id="periodStartDate5" type="text" name="periods[4].periodStartDate"/>
 													</div>
 												</div>
 											</div>
@@ -610,13 +610,13 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodEndDate5" type="text" name="periods[4].period_end_date"/>
+														<input class="datepicker" id="periodEndDate5" type="text" name="periods[4].periodEndDate"/>
 													</div>
 												</div>
 											</div>
 
 											<div class="hr hr-dotted"></div>
-											<input type="hidden" name="periods[5].project_id"
+											<input type="hidden" name="periods[5].projectId"
 															class="col-xs-12 col-sm-5 projectID2" />
 											<input type="hidden" id="period" name="periods[5].period" value="6"
 															class="col-xs-12 col-sm-5" />
@@ -627,7 +627,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<select id="periodLeaderId6" name="periods[5].period_leader_id" class="select2"
+														<select id="periodLeaderId6" name="periods[5].periodLeaderId" class="select2"
 														data-placeholder="Click to Choose...">
 															<option value="">&nbsp;</option>
 															<#list userList as user>
@@ -647,7 +647,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodStartDate6" type="text" name="periods[5].period_start_date"/>
+														<input class="datepicker" id="periodStartDate6" type="text" name="periods[5].periodStartDate"/>
 													</div>
 												</div>
 											</div>
@@ -661,7 +661,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input class="datepicker" id="periodEndDate6" type="text" name="periods[5].period_end_date"/>
+														<input class="datepicker" id="periodEndDate6" type="text" name="periods[5].periodEndDate"/>
 													</div>
 												</div>
 											</div>
@@ -1027,6 +1027,7 @@
 								//window.open("${ctx}/portal_user/show_user_list");
 								//window.location.reload();
 							} else {
+								alert("添加失败");
 								alert(response.errormsg);
 							}
 						});

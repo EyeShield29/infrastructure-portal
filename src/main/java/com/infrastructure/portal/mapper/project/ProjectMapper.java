@@ -41,7 +41,7 @@ public interface ProjectMapper {
 	
 	List<ProjectInfo> queryUnfinishPorject(int id);
 	
-	ProcessConfig getProcessDescription(String processName);
+	ProcessConfig getProcessDescription(@Param("processName")String processName);
 	
 	List<QueryWorkVo> queryPeriodByPage(@Param("qwv")QueryWorkVo queryWorkVo, @Param("leaderId")int leaderId);
 	

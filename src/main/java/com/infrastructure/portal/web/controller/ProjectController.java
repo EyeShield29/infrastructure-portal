@@ -213,10 +213,10 @@ public class ProjectController {
            
            projectInfo.setEntryStaffAccount(portalUser.getAccount());
            projectInfo.setCreateTime(new Date());
-           int projectId = projectService.addProjectInfo(projectInfo);
-           projectService.addProjectPeriod(projectId, projectInfo.getLeaderId(), projectInfo.getProjectStartDate(), projectInfo.getProjectEndDate());
+           projectService.addProjectInfo(projectInfo);
+           projectService.addProjectPeriod(projectInfo.getId(), projectInfo.getLeaderId(), projectInfo.getProjectStartDate(), projectInfo.getProjectEndDate());
            JsonObject data = new JsonObject();
-           data.addProperty("projectId", projectId);
+           data.addProperty("projectId", projectInfo.getId());
            ajaxdata = new AjaxData(true, data, null);
        } catch (Exception e){
            ajaxdata = new AjaxData(false, null, "添加项目失败！");
@@ -295,7 +295,6 @@ public class ProjectController {
        }
        try {
            projectService.addProjectPeriod(periodList);
-           
            ajaxdata = new AjaxData(true, null, null);
        } catch (Exception e){
            ajaxdata = new AjaxData(false, null, "添加项目流程失败！");

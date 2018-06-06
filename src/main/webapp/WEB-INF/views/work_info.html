@@ -12,8 +12,8 @@
 						</script>
 
 		<ul class="breadcrumb">
-			<li><i class="ace-icon fa fa-home home-icon"></i> <a href="${ctx}/home">主页</a>
-			</li>
+			<li><i class="ace-icon fa fa-home home-icon"></i> <a
+				href="${ctx}/home">主页</a></li>
 
 			<li><a href="#">项目管理</a></li>
 			<li><a href="#">我的工作</a></li>
@@ -41,116 +41,139 @@
 
 		<div class="row">
 			<div class="col-xs-12">
-				<h3 class="lighter block green">项目基本信息</h3>
+				<h2 class="lighter block green">项目基本信息</h2>
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目编号 :</label>
-						
+						<label class="col-sm-3 control-label no-padding-right">
+							项目编号 :</label>
+
 						<div class="col-sm-9">
-							<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.projectNum}</label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.projectNum}</label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目名称 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目名称 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.projectName} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.projectName} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目类型 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目类型 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.typeName} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.typeName} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目负责人 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目负责人 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.leaderName} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.leaderName} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目负责公司 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目负责公司 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.company} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.company} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目当前状态 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目当前状态 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.status} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.status} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目录入人员 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目录入人员 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.entryStaffAccount} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left">
+								${projectInfo.entryStaffAccount} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目录入时间 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							项目录入时间 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.createTime} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left">
+								${projectInfo.createTime?string("yyyy-MM-dd")} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目简述 :</label>
-	
-						<div class="col-sm-9" style="word-wrap: break-word;word-break: normal;">
-							<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.description}</label>
+						<label class="col-sm-3 control-label no-padding-right">
+							项目简述 :</label>
+
+						<div class="col-sm-9"
+							style="word-wrap: break-word; word-break: normal;">
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${projectInfo.description}</label>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 项目起止时间 :</label>
-	
-						<div class="col-sm-9" style="word-wrap: break-word;word-break: normal;">
-							<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${projectInfo.projectStartDate?string("yyyy-MM-dd")}</br>到${projectInfo.projectEndDate?string("yyyy-MM-dd")}</label>
+						<label class="col-sm-3 control-label no-padding-right">
+							项目起止时间 :</label>
+
+						<div class="col-sm-9"
+							style="word-wrap: break-word; word-break: normal;">
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left">
+								${projectInfo.projectStartDate?string("yyyy-MM-dd")}</br>到${projectInfo.projectEndDate?string("yyyy-MM-dd")}
+							</label>
 						</div>
 					</div>
 				</form>
 			</div>
-			
-			
+
+
 		</div>
-		
+
 		<div class="hr hr-dotted"></div>
 
 		<div class="row">
-			<div class="col-xs-12">
-				&nbsp;&nbsp;&nbsp;
-				
-			</div>
+			<div class="col-xs-12">&nbsp;&nbsp;&nbsp;</div>
 		</div>
 
 		<div class="row">
@@ -160,13 +183,13 @@
 				<div class="col-xs-12">
 					<#if workInfo.status=0>
 					<button class="btn btn-sm btn-purple" data-toggle="modal"
-					data-target="#modify_period-modal" href="javascript:void(0)"
-					onclick="modifyPeriodInfo('${workInfo.id}','${workInfo.periodStartDate}','${workInfo.periodEndDate}')">
-					<i class="icon-edit bigger-120"></i>修改阶段时间
+						data-target="#modify_period-modal" href="javascript:void(0)"
+						onclick="modifyPeriodInfo('${workInfo.id}','${projectInfo.projectStartDate?string("yyyy-MM-dd")}','${workInfo.periodEndDate?string("yyyy-MM-dd")}')">
+						<i class="icon-edit bigger-120"></i>修改阶段时间
 					</button>
 					</#if>
 					&nbsp;&nbsp;&nbsp;
-					<#if workInfo.status=0&&projectInfo.status=workInfo.period>
+					<#if workInfo.status=0&&projectInfo.status==workInfo.period>
 					<button class="btn btn-sm btn-purple" data-toggle="modal"
 						data-target="#finish_process-modal" href="javascript:void(0)"
 						onclick="finishProcess('${projectInfo.id}','${processId}','${projectInfo.status}','${workInfo.id}')">
@@ -174,58 +197,73 @@
 					</button>
 					</#if>
 				</div>
-				
+
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 阶段名称 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							阶段名称 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${workInfo.periodName} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${workInfo.periodName} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 阶段负责人 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							阶段负责人 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${Session.userName} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> ${Session.userName} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 当前状态 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							当前状态 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> <#if workInfo.status=1>已完成<#elseif workInfo.status=0>未完成</#if> </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left"> <#if workInfo.status=1>已完成<#elseif
+									workInfo.status=0>未完成</#if>
+							</label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 阶段开始时间 :</label>
-	
+						<label class="col-sm-3 control-label no-padding-right">
+							阶段开始时间 :</label>
+
 						<div class="col-sm-9">
-						<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${workInfo.periodStartDate?string("yyyy-MM-dd")} </label>
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left">
+								${workInfo.periodStartDate?string("yyyy-MM-dd")} </label>
 						</div>
 					</div>
-					
+
 					<div class="space-2"></div>
-					
+
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> 阶段完成时间 :</label>
-	
-						<div class="col-sm-9" style="word-wrap: break-word;word-break: normal;">
-							<label class="col-sm-3 control-label no-padding-right" style="text-align:left"> ${workInfo.periodEndDate?string("yyyy-MM-dd")}</label>
+						<label class="col-sm-3 control-label no-padding-right">
+							阶段完成时间 :</label>
+
+						<div class="col-sm-9"
+							style="word-wrap: break-word; word-break: normal;">
+							<label class="col-sm-3 control-label no-padding-right"
+								style="text-align: left">
+								${workInfo.periodEndDate?string("yyyy-MM-dd")}</label>
 						</div>
 					</div>
 				</form>
-				
-				
+
+
 				<div id="timeline-2">
 					<div class="row">
 						<div class="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -244,7 +282,10 @@
 
 										<div class="widget-box transparent">
 											<div class="widget-body">
-												<div class="widget-main no-padding"><#if process.status=1>已完成，流程备注：${process.remark}<#elseif process.status=0>[未完成]</#if></div>
+												<div class="widget-main no-padding">
+													<#if process.status=1>已完成，流程备注：${process.remark}<#elseif
+														process.status=0>[未完成]</#if>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -279,14 +320,14 @@
 								<div class="from-group">
 									<div class="input-group">
 										<input type="hidden" id="periodid" name="id"
-											class="col-xs-10 col-sm-5" value="" /> 
-										
-										<label class="col-sm-3 control-label no-padding-right">阶段开始日期:</label>
+											class="col-xs-10 col-sm-5" value="" /> <label
+											class="col-sm-3 control-label no-padding-right">阶段开始日期:</label>
 										<div class="col-sm-7">
-											<input type="text" id="periodStartDate" name="periodStartDate"
-												class="col-xs-10 col-sm-5 datepicker" value="" required />
+											<input type="text" id="periodStartDate"
+												name="periodStartDate" class="col-xs-10 col-sm-5 datepicker"
+												value="" required />
 										</div>
-										
+
 										<label class="col-sm-3 control-label no-padding-right">阶段完成日期:</label>
 										<div class="col-sm-7">
 											<input type="text" id="periodEndDate" name="periodEndDate"
@@ -310,7 +351,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="finish_process-modal" class="modal fade" tabindex="-1"
 		function="dialog">
 		<div class="modal-dialog modal-lg">
@@ -320,7 +361,8 @@
 					<h4 class="blue bigger">结束当前流程</h4>
 				</div>
 				<div class="modal-body overflow-visible">
-					<form class="form-inline" action="${ctx}/project/finishProjectProcess"
+					<form class="form-inline"
+						action="${ctx}/project/finishProjectProcess"
 						id="finish_process-form" method="post">
 						<div class="row">
 							<div class="col-xs-12">
@@ -328,18 +370,15 @@
 								<div class="from-group">
 									<div class="input-group">
 										<input type="hidden" id="projectId" name="projectId" value=""
-											class="col-xs-12 col-sm-5" /> 
-										<input type="hidden" id="period" name="period" value=""
-											class="col-xs-12 col-sm-5" /> 
+											class="col-xs-12 col-sm-5" /> <input type="hidden"
+											id="period" name="period" value="" class="col-xs-12 col-sm-5" />
 										<input type="hidden" id="processId" name="processId" value=""
-											class="col-xs-12 col-sm-5" /> 
-										<input type="hidden" id="periodId" name="periodId" value=""
-											class="col-xs-12 col-sm-5" /> 
-										<label
+											class="col-xs-12 col-sm-5" /> <input type="hidden"
+											id="periodId" name="periodId" value=""
+											class="col-xs-12 col-sm-5" /> <label
 											class="col-sm-3 control-label no-padding-right">当前流程工作备注:</label>
 										<div class="col-sm-7">
-											<textarea class="input-xlarge" name="remark"
-												required></textarea>
+											<textarea class="input-xlarge" name="remark" required></textarea>
 										</div>
 									</div>
 								</div>

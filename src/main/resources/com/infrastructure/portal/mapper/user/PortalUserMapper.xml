@@ -57,6 +57,12 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
+  <select id="queryUserList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_user
+  </select>
+  
   <select id="selectByPage" parameterType="com.infrastructure.portal.entity.vo.QueryUserVo" resultMap="BaseResultMap">
   	select 
     pu.*
@@ -128,7 +134,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   
-  <insert id="addPortalUser" parameterType="com.infrastructure.portal.entity.po.portal.PortalUser">
+  <insert id="addPortalUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.infrastructure.portal.entity.po.portal.PortalUser">
     insert into portal_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

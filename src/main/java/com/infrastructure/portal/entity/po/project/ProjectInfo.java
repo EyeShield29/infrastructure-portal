@@ -2,6 +2,8 @@ package com.infrastructure.portal.entity.po.project;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ProjectInfo {
     private Integer id;
 
@@ -20,13 +22,16 @@ public class ProjectInfo {
     private String company;
 
     private Integer status;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date projectStartDate;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date projectEndDate;
 
     private Date createTime;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public Integer getId() {

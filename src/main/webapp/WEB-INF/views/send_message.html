@@ -47,14 +47,15 @@
 							接收人账号 </label>
 
 						<div class="col-sm-9">
-							<!-- #section:plugins/input.select2 -->
-							<select id="receiverAccount" name="receiverAccount" class="select2 col-xs-10 col-sm-5"
-								data-placeholder="Click to Choose...">
-								<option value="">&nbsp;</option>
-								<option value="admin">admin</option>
-								<option value="manger">manger</option>
-							</select>
-
+							<div class="clearfix">
+								<select id="receiverAccount" name="receiverAccount" class="select2"
+										data-placeholder="Click to Choose...">
+										<option value="">&nbsp;</option>
+										<#list userList as user>
+											<option value="${user.id}">${user.account}(${user.userName})</option>
+										</#list>
+								</select>
+							 </div>
 						</div>
 					</div>
 
@@ -101,6 +102,11 @@
 	<!-- /.page-content -->
 
 	<script type="text/javascript">
+	$(".select2").css('width', '200px').select2({
+		allowClear : true
+	}).on('change', function() {
+		$(this).closest('form').validate().element($(this));
+	});
 		$(function() {
 				$("#send_message-form").validate();
 				$("#send_message-form").bind(

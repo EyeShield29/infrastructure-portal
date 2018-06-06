@@ -2,6 +2,8 @@ package com.infrastructure.portal.entity.po.project;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ProjectPeriod {
     private Integer id;
 
@@ -12,9 +14,11 @@ public class ProjectPeriod {
     private String periodName;
 
     private Integer periodLeaderId;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date periodStartDate;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date periodEndDate;
 
     private Integer status;

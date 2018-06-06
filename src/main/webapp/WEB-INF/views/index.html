@@ -542,10 +542,10 @@
 				         $("#messageWarn").html(data.data.messageCount+"条未读信息");
 		            	 var unreadMessageList = $.parseJSON(data.data.unreadMessageList);
 				         var liContent="";
-				         //alert(unreadMessageList.length);
+				         //alert(unreadMessageList[0].);
 				         liContent="";
 		            	 for(var i=0; i<unreadMessageList.length; i++){
-			            	liContent ='<li><a href="${ctx}/message/show_message_info?id='+ unreadMessageList[i].id+'" target="iframe_content" class="clearfix"><img src="${ctx}/static/assets/avatars/avatar.png" class="msg-photo" alt="Jim\'s Avatar" /><span class="msg-body"><span class="msg-title"><span class="blue">'+ unreadMessageList[i].sender_account+':</span>'+unreadMessageList[i].message_title+'</span><span class="msg-time"><i class="ace-icon fa fa-clock-o"></i><span>'+unreadMessageList[i].send_time+'</span></span></span></a></li>';
+			            	liContent ='<li><a href="${ctx}/message/show_message_info?id='+ unreadMessageList[i].id+'" target="iframe_content" class="clearfix"><img src="${ctx}/static/assets/avatars/avatar.png" class="msg-photo" alt="Jim\'s Avatar" /><span class="msg-body"><span class="msg-title"><span class="blue">'+ unreadMessageList[i].senderAccount+':</span>'+unreadMessageList[i].messageTitle+'</span><span class="msg-time"><i class="ace-icon fa fa-clock-o"></i><span>'+unreadMessageList[i].sendTime+'</span></span></span></a></li>';
 							//liContent ='<li><a href="#" class="clearfix">xxxxxx</a></li>';
 							//alert(liContent);
 			            	$("#messagelist").append(liContent);
@@ -565,7 +565,7 @@
 				         //alert(unreadMessageList.length);
 				         liContent="";
 		            	 for(var i=0; i<unfinishProjectList.length; i++){
-			            	liContent = '<li><a href="${ctx}/project/view_project?projectId='+unfinishProjectList[i].id+'" target="iframe_content"><div class="clearfix"><span class="pull-left">'+unfinishProjectList[i].project_name+'</span><span class="pull-right">'+unfinishProjectList[i].process_percent+'%</span></div>'
+			            	liContent = '<li><a href="${ctx}/project/view_project?projectId='+unfinishProjectList[i].id+'" target="iframe_content"><div class="clearfix"><span class="pull-left">'+unfinishProjectList[i].projectName+'</span><span class="pull-right">'+unfinishProjectList[i].processPercent+'%</span></div>'
 			            	+ '<div class="progress progress-mini"><div style="width:'+unfinishProjectList[i].processPercent+'%" class="progress-bar"></div></div></a></li>';
 							//liContent ='<li><a href="#" class="clearfix">xxxxxx</a></li>';
 							//alert(liContent);

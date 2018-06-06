@@ -21,8 +21,9 @@ import com.google.gson.JsonObject;
 import com.github.pagehelper.PageInfo;
 import com.infrastructure.portal.entity.po.message.MessageInfo;
 import com.infrastructure.portal.entity.po.portal.PortalUser;
-
+import com.infrastructure.portal.entity.vo.ListUserVo;
 import com.infrastructure.portal.service.message.MessageInfoService;
+import com.infrastructure.portal.service.user.PortalUserService;
 import com.infrastructure.portal.web.common.AjaxData;
 import com.infrastructure.portal.web.common.MVCUtil;
 
@@ -34,7 +35,9 @@ public class MessageInfoController {
     
 	@Autowired
 	private MessageInfoService messageInfoService;
-
+	
+	@Autowired
+	private PortalUserService userService;
 	/**
 	 * 获取信件列表
 	 * type区分发送列表或接收列表，0为发送列表，1为接收列表
@@ -162,6 +165,8 @@ public class MessageInfoController {
 	@RequiresPermissions("portal:message:send")
     @RequestMapping(value = "message/sendMessage", method = RequestMethod.GET)
     public String goSendMessage(Model model) throws Exception {
+		List<ListUserVo> userList = userService.queryUserVoList();
+		model.addAttribute("userList", userList);
        return "send_message";
     }
 	
@@ -195,6 +200,7 @@ public class MessageInfoController {
                messageInfo.setTransId("111111");
                type = 0;
            }
+           
            messageInfo.setSenderAccount(portalUser.getAccount());
            messageInfo.setSendTime(new Date());
            messageInfo.setSenderVisible(1);

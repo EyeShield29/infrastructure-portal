@@ -31,7 +31,8 @@ public interface PortalUserMapper {
     PortalUser getUserByAccount(String userName);
     
     List<PortalUser> selectByPage(QueryUserVo queryUserVo);
-
+    
+    
     List<ListUserVo> queryUserVoListAll();
     
     List<PortalRole> listPortalUserRoles(int id);

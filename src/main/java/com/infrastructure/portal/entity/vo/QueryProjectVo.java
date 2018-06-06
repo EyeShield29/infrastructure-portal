@@ -17,9 +17,7 @@ public class QueryProjectVo
 
     private String description;
 
-    private Integer leaderId;
-
-    private String userName;
+    private String leaderName;
 
     private String company;
     
@@ -71,17 +69,12 @@ public class QueryProjectVo
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getLeaderId() {
-		return leaderId;
+	
+	public String getLeaderName() {
+		return leaderName;
 	}
-	public void setLeaderId(Integer leaderId) {
-		this.leaderId = leaderId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
 	}
 	public String getCompany() {
 		return company;

@@ -52,7 +52,7 @@
   
   <select id="getDownloadCounts" resultType="java.lang.Integer">
   	select 
-  	sum(download_times) 
+  	coalesce(sum(download_times),0)
   	from document_info
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

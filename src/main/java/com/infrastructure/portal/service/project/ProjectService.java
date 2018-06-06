@@ -290,7 +290,7 @@ public class ProjectService {
         // TODO Auto-generated method stub
         ProjectPeriod projectPeriod = new ProjectPeriod();
         projectPeriod.setPeriod(0);
-        projectPeriod.setStatus(0);
+        projectPeriod.setStatus(1);
         projectPeriod.setPeriodName("总负责人");
         projectPeriod.setProjectId(projectId);
         projectPeriod.setPeriodStartDate(startDate);

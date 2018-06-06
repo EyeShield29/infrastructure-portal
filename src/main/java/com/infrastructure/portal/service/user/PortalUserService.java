@@ -43,6 +43,7 @@ public class PortalUserService {
         return portalUserList;
     }
     
+    
     /**
      * 查询所有用户角色列表
      */
@@ -111,11 +112,11 @@ public class PortalUserService {
         String passwd = PortalUser.getPasswd();
         passwd = DigestUtils.md5Hex(passwd);
         PortalUser.setPasswd(passwd);
-        int userId = portalUserMapper.addPortalUser(PortalUser);
+        portalUserMapper.addPortalUser(PortalUser);
         
         PortalUserRole pur = new PortalUserRole();
         pur.setRoleId(Integer.parseInt(role));
-        pur.setUserId(userId);
+        pur.setUserId(PortalUser.getId());
         pur.setCreateTime(new Date());        
 
         portalUserMapper.addPortalUserRole(pur);

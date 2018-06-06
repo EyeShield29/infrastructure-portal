@@ -1,7 +1,10 @@
 
 <div class="row">
+	<#if (pageInfo.pages==0)><div class="col-sm-6">当前无记录</div>
+	<#else>
 	<div class="col-sm-6">当前显示第${pageInfo.pageNum}页(${pageInfo.startRow}-${pageInfo.pageSize}),
 		共${pageInfo.pages}页,${pageInfo.total}条 , 每页${pageInfo.pageSize}条</div>
+	</#if>
 	<div class="col-sm-6">
 		<ul class="pagination">
 			<li <#if (pageInfo.pageNum==1)>class="disabled"</#if>> <a
