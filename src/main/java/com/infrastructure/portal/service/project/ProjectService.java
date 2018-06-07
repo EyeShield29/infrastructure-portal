@@ -75,7 +75,6 @@ public class ProjectService {
         for (String processName : projectProcessList) {
             serialNum++;
             ProjectProcess projectProcess = new ProjectProcess();
-            //System.out.println(projectId+"haha");
             projectProcess.setProjectId(projectId);
             projectProcess.setPeriod(period);
             projectProcess.setSerialNum(serialNum);

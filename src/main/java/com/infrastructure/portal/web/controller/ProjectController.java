@@ -242,9 +242,6 @@ public class ProjectController {
        String[] processOfPeriod4 = MVCUtil.getParamArray("period4[]");
        String[] processOfPeriod5 = MVCUtil.getParamArray("period5[]");
        String[] processOfPeriod6 = MVCUtil.getParamArray("period6[]");
-       
-       System.out.println();
-
        if (StringUtils.isNotBlank(msg)) {
            ajaxdata = new AjaxData(false, null, msg);
            MVCUtil.ajaxJson(ajaxdata);

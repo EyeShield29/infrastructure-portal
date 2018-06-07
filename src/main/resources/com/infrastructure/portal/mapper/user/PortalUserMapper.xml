@@ -31,6 +31,12 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   
+  <resultMap id="ListUserVoMap" type="com.infrastructure.portal.entity.vo.ListUserVo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     id, account, passwd, user_name, sex, phone_num, email, user_portrait, last_login_time, 
     create_time, update_time
@@ -70,7 +76,7 @@
   	<include refid="query_potaluser_where" />
   </select>
   
-  <select id="queryUserVoListAll" resultType="com.infrastructure.portal.entity.vo.ListUserVo">
+  <select id="queryUserVoListAll" resultMap="ListUserVoMap">
   	select 
   	id,account,user_name 
   	from portal_user 

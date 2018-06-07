@@ -39,7 +39,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		try {
 		    portalUser = portalUserMapper.getUserByAccount(token.getUsername());
 		} catch (Exception e) {
-			System.out.println("错了");
 			logger.error(
 					"SystemAuthorizingRealm.doGetAuthenticationInfo faild!", e);
 		}

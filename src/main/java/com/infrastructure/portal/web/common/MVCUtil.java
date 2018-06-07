@@ -41,7 +41,6 @@ public class MVCUtil {
 	public static String[] getParamArray(String name) {
 		Map<String, String[]> params = currentRequest.get().getParameterMap();
 		if (params != null && params.get(name) != null) {
-			System.out.println(name + " param : "+params.get(name));
 		    return params.get(name);
 		}
 		return null;

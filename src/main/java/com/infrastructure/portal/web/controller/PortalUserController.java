@@ -102,7 +102,6 @@ public class PortalUserController {
 	@RequestMapping(value = "portal_user/show_user_list",method = RequestMethod.GET)
     public String showUserList(Model model) throws Exception {
         int pageid = MVCUtil.getIntParam("pageid");
-        //System.out.println(pageid+"haha"+totalCount);
         QueryUserVo queryUserVo = null;
         if (pageid <= 0) {
             pageid = 1;

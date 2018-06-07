@@ -82,7 +82,6 @@ public class FileService {
 			// 保存文件
 			//mf.transferTo(new File(filepath));
 			String filepath = parentPath + fileuri;
-			System.out.println(filepath);
 			mf.transferTo(new File(filepath));
 		} catch (Exception e) {
 			//throw new ServiceException(ErrorCode.CODE_JAVA, "upload faild!", e);
