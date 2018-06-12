@@ -120,7 +120,7 @@
 										<#elseif project.status=7>已完成
 										</#if>
 									</td>
-									<td>${project.userName}</td>
+									<td>${project.leaderName}</td>
 									<td>${project.projectStartDate?string("yyyy-MM-dd")}到${project.projectEndDate?string("yyyy-MM-dd")}</td>
 									<td>
 										<div class="hidden-sm hidden-xs action-buttons">
@@ -128,13 +128,15 @@
 												data-target="#modify_project-modal" href="javascript:void(0)"
 												onclick="modifyProject('${project.id}','${project.projectName}','${project.typeName}')"> <i
 												class="ace-icon fa fa-pencil bigger-130"></i>
-											</a> <a class="red" href="javascript:void(0)"
-												onclick="deleteProject('${project.id}')"> <i
-												class="ace-icon fa fa-trash-o bigger-130"></i>
-											</a> -->
-										<a class="blue" href="${ctx}/project/view_project?projectId=${project.id}"> 
+											</a> -->										
+											<a class="blue" href="${ctx}/project/view_project?projectId=${project.id}"> 
 											<i class="ace-icon fa fa-search-plus bigger-130"></i>
 										</a>
+										<a class="red" href="javascript:void(0)" 
+												onclick="deleteProject('${project.id}')"> <i
+												class="ace-icon fa fa-trash-o bigger-130"></i>
+											</a>
+										
 									</div>
 
 									</td>

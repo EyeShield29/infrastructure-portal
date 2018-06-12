@@ -1,9 +1,15 @@
 package com.infrastructure.portal.entity.po.portal;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PortalRoleFunction {
-    private Integer roleId;
+public class PortalRoleFunction implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer roleId;
 
     private Integer functionId;
     

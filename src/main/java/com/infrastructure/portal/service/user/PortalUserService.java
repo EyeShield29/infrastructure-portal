@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.infrastructure.portal.entity.po.portal.PortalRole;
@@ -107,13 +110,14 @@ public class PortalUserService {
     /**
      * 添加新用户
      */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void addPortalUser(PortalUser PortalUser, String role)
             throws Exception {
         String passwd = PortalUser.getPasswd();
         passwd = DigestUtils.md5Hex(passwd);
         PortalUser.setPasswd(passwd);
         portalUserMapper.addPortalUser(PortalUser);
-        
+        System.out.println(1/0);
         PortalUserRole pur = new PortalUserRole();
         pur.setRoleId(Integer.parseInt(role));
         pur.setUserId(PortalUser.getId());

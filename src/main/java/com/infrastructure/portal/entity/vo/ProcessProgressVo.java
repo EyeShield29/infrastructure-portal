@@ -11,7 +11,7 @@ package com.infrastructure.portal.entity.vo;
  * ============================== <br>
  * 团队：CSCW <br>
  * 系统：TODO <br>
- * 研发：Junfa <br>
+ * 研发：cxl <br>
  * 创建时间：2017年5月2日 下午6:10:40 <br>=
  * ==============================
  */

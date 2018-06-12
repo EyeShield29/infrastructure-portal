@@ -1,9 +1,15 @@
 package com.infrastructure.portal.entity.po.message;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MessageInfo {
-    private Integer id;
+public class MessageInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String transId;
 

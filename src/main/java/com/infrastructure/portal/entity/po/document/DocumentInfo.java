@@ -1,9 +1,15 @@
 package com.infrastructure.portal.entity.po.document;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DocumentInfo {
-    private Integer id;
+public class DocumentInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer uploaderId;
 

@@ -1,9 +1,15 @@
 package com.infrastructure.portal.entity.po.project;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ProjectProcess {
-    private Integer id;
+public class ProjectProcess implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer projectId;
 

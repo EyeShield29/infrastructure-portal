@@ -1,9 +1,15 @@
 package com.infrastructure.portal.entity.po.config;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserTitleConfig {
-    private Integer id;
+public class UserTitleConfig implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String titleName;
 

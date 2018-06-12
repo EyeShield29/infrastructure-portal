@@ -41,8 +41,7 @@ public class ProjectTypeConfigService {
      * 添加流程
      */
     public void addProjectTypeConfig(ProjectType projectTypeConfig)
-            throws Exception {
-        
+            throws Exception {     
         projectTypeConfig.setCreateTime(new Date());
         projectTypeMapper.addProjectTypeConfig(projectTypeConfig);
     }

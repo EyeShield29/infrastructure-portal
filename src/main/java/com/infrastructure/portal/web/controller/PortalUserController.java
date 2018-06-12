@@ -119,8 +119,7 @@ public class PortalUserController {
         }
         PageInfo<PortalUser> pageInfo = portalUserService.queryPortalUserListByPage(pageid, PAGESIZE, queryUserVo);
         List<PortalUser> portaltUserList = pageInfo.getList();
-        List<QueryUserVo> userVoList=portalUserService
-                .getQueryUserVoList(portaltUserList);
+        List<QueryUserVo> userVoList=portalUserService.getQueryUserVoList(portaltUserList);
         List<PortalRole> roleList = portalUserService.getRoleList();
         List<PortalRole> portalRoleNameList = portalUserService.getRoleListName();
         model.addAttribute("portalRoleNameList", portalRoleNameList);
